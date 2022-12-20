@@ -1,11 +1,9 @@
 package com.example.monitoringapp
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.EventLogTags
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 
 //check
@@ -23,11 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fab_button: FloatingActionButton = findViewById(R.id.fab_button)
-        fab_button.setOnClickListener{
-            val intent = Intent(this, AddObservation::class.java)
-            startActivity(intent)
-        }
         postToList()
 
         rv_recyclerView.layoutManager = LinearLayoutManager(this)
