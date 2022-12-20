@@ -11,12 +11,14 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerAdapter (private var titles: List<String>, private var details: List<String>, private var images: List<Int>) :
+class RecyclerAdapter (private var list_ids: List<String>, private var dates: List<String>, private var hours: List<String>, private var locations: List<String>, private var species: List<String>) :
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val itemTitle: TextView = itemView.findViewById(R.id.tv_title)
-        val itemDetail: TextView = itemView.findViewById(R.id.tv_description)
-        val itemPicture: ImageView = itemView.findViewById(R.id.iv_image)
+        val itemListId: TextView = itemView.findViewById(R.id.tv_listid)
+        val itemDate: TextView = itemView.findViewById(R.id.tv_date)
+        val itemHour: TextView = itemView.findViewById(R.id.tv_hour)
+        val itemLocation: TextView = itemView.findViewById(R.id.tv_location)
+        val itemSpecies: TextView = itemView.findViewById(R.id.tv_species)
 
         init{
             itemView.setOnClickListener{v: View->
@@ -32,12 +34,14 @@ class RecyclerAdapter (private var titles: List<String>, private var details: Li
     }
 
     override fun getItemCount(): Int {
-        return titles.size
+        return dates.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemTitle.text = titles[position]
-        holder.itemDetail.text = details[position]
-        holder.itemPicture.setImageResource(images[position])
+        holder.itemListId.text = list_ids[position]
+        holder.itemDate.text = dates[position]
+        holder.itemHour.text = hours[position]
+        holder.itemLocation.text = locations[position]
+        holder.itemSpecies.text = species[position]
     }
 }
