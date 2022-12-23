@@ -25,4 +25,14 @@
             app:popUpTo="@id/myObservations"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/allObservations"
+        android:name="com.example.monitoringapp.allObservations"
+        android:label="fragment_all_observations"
+        tools:layout="@layout/fragment_all_observations" />
+    <fragment
+        android:id="@+id/userProfile"
+        android:name="com.example.monitoringapp.UserProfile"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" />
 </navigation>
