@@ -5,55 +5,68 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_my_observations.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MyObservations.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MyObservations : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var adapter: RecyclerAdapter
+    private lateinit var recyclerView: RecyclerView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var idList = mutableListOf<String>()
+    private var dateList = mutableListOf<String>()
+    private var hourList = mutableListOf<String>()
+    private var locationList = mutableListOf<String>()
+    private var speciesList = mutableListOf<String>()
+    //private var imagesList = mutableListOf<Int>()
+
+    private lateinit var fabButton: FloatingActionButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_observations, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_my_observations, container, false)
+
+        fabButton = view.findViewById(R.id.fab_button)
+        fabButton.setOnClickListener{
+            Navigation.findNavController(view).navigate(R.id.action_myObservations_to_addObservation)
+        }
+
+        return view
+        }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postToList()
+
+        val layoutManager = LinearLayoutManager(context)
+        recyclerView = view.findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = RecyclerAdapter(idList, dateList, hourList, locationList, speciesList)
+
+        //rv_recyclerView.layoutManager = LinearLayoutManager(context)
+        //rv_recyclerView.adapter = RecyclerAdapter(idList, dateList, hourList, locationList, speciesList)*/
+    }
+    private fun addToList(list_id: String, date: String, hour: String, location: String, species: String, image: Int){
+        idList.add(list_id)
+        dateList.add(date)
+        hourList.add(hour)
+        locationList.add(location)
+        speciesList.add(species)
+        //imagesList.add(image)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MyObservations.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MyObservations().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun postToList(){
+        for(i in 1..25){
+            addToList("#$i", "Date $i","Hour $i", "Location $i", "/ Species $i", R.mipmap.ic_launcher_round)
+        }
     }
 }

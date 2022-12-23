@@ -13,7 +13,29 @@ import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerAdapter (private var list_ids: List<String>, private var dates: List<String>, private var hours: List<String>, private var locations: List<String>, private var species: List<String>) :
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+    //RecyclerView.ViewHolder
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+        //return RecyclerView.ViewHolder(v)
+        return ViewHolder(v)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemListId.text = list_ids[position]
+        holder.itemDate.text = dates[position]
+        holder.itemHour.text = hours[position]
+        holder.itemLocation.text = locations[position]
+        holder.itemSpecies.text = species[position]
+    }
+
+    override fun getItemCount(): Int {
+        return dates.size
+    }
+
+
+    //inner class
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val itemListId: TextView = itemView.findViewById(R.id.tv_listid)
         val itemDate: TextView = itemView.findViewById(R.id.tv_date)
         val itemHour: TextView = itemView.findViewById(R.id.tv_hour)
@@ -26,22 +48,5 @@ class RecyclerAdapter (private var list_ids: List<String>, private var dates: Li
                 Toast.makeText(itemView.context, "You clicked on # ${position+1}", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
-        return ViewHolder(v)
-    }
-
-    override fun getItemCount(): Int {
-        return dates.size
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemListId.text = list_ids[position]
-        holder.itemDate.text = dates[position]
-        holder.itemHour.text = hours[position]
-        holder.itemLocation.text = locations[position]
-        holder.itemSpecies.text = species[position]
     }
 }

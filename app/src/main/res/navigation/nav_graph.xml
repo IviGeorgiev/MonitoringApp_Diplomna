@@ -21,6 +21,8 @@
         tools:layout="@layout/fragment_add_observation" >
         <action
             android:id="@+id/action_addObservation_to_myObservations"
-            app:destination="@id/myObservations" />
+            app:destination="@id/myObservations"
+            app:popUpTo="@id/myObservations"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
