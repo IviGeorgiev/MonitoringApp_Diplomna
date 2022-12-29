@@ -3,11 +3,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddObservation">
+    tools:context=".AddObservation"
+    android:background="@color/dirty_white">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Biba!" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+            
+            <EditText
+                android:id="@+id/date_field"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Date"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/text_field_background"/>
+
+            <EditText
+                android:id="@+id/start_time_field"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Start time"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/text_field_background"/>
+
+            <EditText
+                android:id="@+id/minutes_field"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Minutes"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/text_field_background"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/choose_location_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow"
+            android:drawableRight="@drawable/ic_baseline_add_location"
+            android:paddingRight="20dp"
+            android:text="Choose location..."
+            android:textAllCaps="false"
+            android:textColor="@color/dark_orange"
+            android:textStyle="bold"
+            android:textSize="18sp"
+
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"/>
+    </LinearLayout>
 
 </FrameLayout>

@@ -58,6 +58,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 
+    implementation 'com.android.databinding:library:3.5.0-alpha06'
     implementation 'androidx.databinding:databinding-compiler:3.6.2'
 
 }

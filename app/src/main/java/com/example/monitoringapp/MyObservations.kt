@@ -27,6 +27,11 @@ class MyObservations : Fragment() {
 
     private lateinit var fabButton: FloatingActionButton
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        postToList()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +49,6 @@ class MyObservations : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        postToList()
 
         val layoutManager = LinearLayoutManager(context)
         recyclerView = view.findViewById(R.id.recycler_view)
@@ -68,5 +72,9 @@ class MyObservations : Fragment() {
         for(i in 1..25){
             addToList("#$i", "Date $i","Hour $i", "Location $i", "/ Species $i", R.mipmap.ic_launcher_round)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 }

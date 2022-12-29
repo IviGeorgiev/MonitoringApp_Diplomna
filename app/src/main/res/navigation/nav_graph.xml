@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/myObservations"
         android:name="com.example.monitoringapp.MyObservations"
-        android:label="fragment_my_observations"
+        android:label="My observations"
         tools:layout="@layout/fragment_my_observations" >
         <action
             android:id="@+id/action_myObservations_to_addObservation"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/addObservation"
         android:name="com.example.monitoringapp.AddObservation"
-        android:label="fragment_add_observation"
+        android:label="Add observation"
         tools:layout="@layout/fragment_add_observation" >
         <action
             android:id="@+id/action_addObservation_to_myObservations"
