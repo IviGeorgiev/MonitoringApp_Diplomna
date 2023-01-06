@@ -13,7 +13,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="dark_grey">#5A5A5A</color>
 
-    <color name="yellow">#fefbd2</color>
+    <color name="pale_yellow">#fefbd2</color>
     <color name="dark_orange">#c68717</color>
     <color name="dirty_white">#f9f9f9</color>
+    <color name="pale_grey">#ededed</color>
 </resources>

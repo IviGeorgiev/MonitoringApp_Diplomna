@@ -24,6 +24,9 @@
             app:destination="@id/myObservations"
             app:popUpTo="@id/myObservations"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addObservation_to_speciesList"
+            app:destination="@id/speciesList" />
     </fragment>
     <fragment
         android:id="@+id/allObservations"
@@ -35,4 +38,29 @@
         android:name="com.example.monitoringapp.UserProfile"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/speciesList"
+        android:name="com.example.monitoringapp.SpeciesList"
+        android:label="Add species to Observation"
+        tools:layout="@layout/fragment_species_list" >
+        <action
+            android:id="@+id/action_speciesList_to_addObservation"
+            app:destination="@id/addObservation"
+            app:popUpTo="@id/addObservation"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_speciesList_to_speciesDetails"
+            app:destination="@id/speciesDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/speciesDetails"
+        android:name="com.example.monitoringapp.SpeciesDetails"
+        android:label="fragment_species_details"
+        tools:layout="@layout/fragment_species_details" >
+        <action
+            android:id="@+id/action_speciesDetails_to_speciesList"
+            app:destination="@id/speciesList"
+            app:popUpTo="@id/speciesList"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

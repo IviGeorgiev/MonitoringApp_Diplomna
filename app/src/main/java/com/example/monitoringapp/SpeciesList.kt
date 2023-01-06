@@ -6,19 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_my_observations.*
 
-class AddObservation : Fragment() {
-
-    private lateinit var button: ImageButton
+class SpeciesList : Fragment() {
     private lateinit var recyclerView: RecyclerView
 
     private var speciesNamesList = mutableListOf<String>()
+
+    private lateinit var button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +30,7 @@ class AddObservation : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add_observation, container, false)
-
-        val button = view.findViewById<ImageButton>(R.id.choose_species_button)
-        button.setOnClickListener() {
-            Navigation.findNavController(view).navigate(R.id.action_addObservation_to_speciesList)
-        }
+        val view: View = inflater.inflate(R.layout.fragment_species_list, container, false)
         return view
     }
 
@@ -54,10 +49,11 @@ class AddObservation : Fragment() {
     }
 
     private fun postToList(){
-        for(i in 1..9){
+        for(i in 1..19){
             addToList("Species name $i")
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
     }
