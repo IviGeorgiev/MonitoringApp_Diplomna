@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.monitoringapp.databinding.FragmentAddObservationBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AddObservation : Fragment() {
@@ -29,14 +31,17 @@ class AddObservation : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val binding = FragmentAddObservationBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add_observation, container, false)
+        //val view = inflater.inflate(R.layout.fragment_add_observation, container, false)
 
-        val button = view.findViewById<ImageButton>(R.id.choose_species_button)
+        val button = binding.root.findViewById<ImageButton>(R.id.choose_species_button)
         button.setOnClickListener() {
-            Navigation.findNavController(view).navigate(R.id.action_addObservation_to_speciesList)
+            Navigation.findNavController(binding.root).navigate(R.id.action_addObservation_to_speciesList)
         }
-        return view
+
+        //val binding = FragmentAddObservationBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
