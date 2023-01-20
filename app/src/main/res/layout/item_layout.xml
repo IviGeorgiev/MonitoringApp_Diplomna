@@ -1,101 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_cardView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?selectableItemBackground"
-    app:cardCornerRadius="5dp">
+    <data>
+        <variable name="myobservation" type="com.example.monitoringapp.MyObservationsViewModel"/>
+    </data>
 
-    <RelativeLayout
-        android:id="@+id/rl_wrapper"
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/cv_cardView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
+        app:cardCornerRadius="5dp">
 
-        <TextView
-            android:id="@+id/tv_listid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="Id."
-            android:textColor="@color/dark_grey"
-            android:textSize="17sp"
-
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"/>
-
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/rl_wrapper"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignTop="@id/tv_listid"
-            android:layout_toEndOf="@id/tv_listid"
-            android:layout_marginBottom="10dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_listid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Date"
-                    android:textColor="@color/green"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
+                android:text="@{myobservation.myobservation1.id}"
+                android:textColor="@color/dark_grey"
+                android:textSize="17sp"
 
-                <TextView
-                    android:id="@+id/tv_hour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="hour"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp" />
 
             <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/tv_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_below="@id/tv_date"
-                    android:text="Location"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="16sp" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@id/tv_listid"
+                android:layout_toEndOf="@id/tv_listid"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_species"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="/ species"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="16sp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@{myobservation.myobservation1.date}"
+                        android:textColor="@color/green"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@{myobservation.myobservation1.hour}"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_below="@id/tv_date"
+                        android:text="@{myobservation.myobservation1.location}"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_species"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@{myobservation.myobservation1.species}"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_pictures"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_baseline_insert_photo_24"/>
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/iv_pictures"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_baseline_insert_photo_24" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

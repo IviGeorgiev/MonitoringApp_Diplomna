@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +24,10 @@ class AddObservation : Fragment() {
 
     private var speciesNamesList = mutableListOf<String>()
 
+    private lateinit var binding: FragmentAddObservationBinding
+    //private lateinit var observationViewModel: ObservationViewModel
+    val observationViewModel: ObservationViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         postToList()
@@ -31,12 +37,21 @@ class AddObservation : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //val viewModel: ObservationViewModel
         val binding = FragmentAddObservationBinding.inflate(layoutInflater, container, false)
+        //binding  = DataBindingUtil.inflate(inflater,R.layout.fragment_add_observation, container, false)
+
+        binding.observation = observationViewModel
+
+        binding.lifecycleOwner = viewLifecycleOwner
+        //val observationViewModel = ObservationViewModel()
+        //binding.setVariable(FragmentAddObservationBinding.observation, observationViewModel)
+
         // Inflate the layout for this fragment
         //val view = inflater.inflate(R.layout.fragment_add_observation, container, false)
 
-        val button = binding.root.findViewById<ImageButton>(R.id.choose_species_button)
-        button.setOnClickListener() {
+        //val button = binding.root.findViewById<ImageButton>(R.id.choose_species_button)
+        binding.chooseSpeciesButton.setOnClickListener() {
             Navigation.findNavController(binding.root).navigate(R.id.action_addObservation_to_speciesList)
         }
 
@@ -63,7 +78,7 @@ class AddObservation : Fragment() {
             addToList("Species name $i")
         }
     }
-    override fun onDestroyView() {
+    /*override fun onDestroyView() {
         super.onDestroyView()
-    }
+    }*/
 }
