@@ -5,19 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.monitoringapp.databinding.FragmentAddObservationBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class AddObservation : Fragment() {
+//layout = fragment_add_observation
+
+class EditObservation : Fragment() {
 
     private lateinit var button: ImageButton
     private lateinit var recyclerView: RecyclerView
@@ -32,6 +29,8 @@ class AddObservation : Fragment() {
         super.onCreate(savedInstanceState)
         postToList()
     }
+
+    //eho
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +51,7 @@ class AddObservation : Fragment() {
 
         //val button = binding.root.findViewById<ImageButton>(R.id.choose_species_button)
         binding.chooseSpeciesButton.setOnClickListener() {
-            Navigation.findNavController(binding.root).navigate(R.id.action_addObservation_to_speciesList)
+            Navigation.findNavController(binding.root).navigate(R.id.action_editObservation_to_speciesList)
         }
 
         //val binding = FragmentAddObservationBinding.inflate(layoutInflater, container, false)

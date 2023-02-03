@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="myobservation" type="com.example.monitoringapp.MyObservationsViewModel"/>
+        <variable name="myobservation" type="com.example.monitoringapp.data.MyObservationData"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -27,7 +27,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="@{myobservation.myobservation1.id}"
                 android:textColor="@color/dark_grey"
                 android:textSize="17sp"
 
@@ -54,7 +53,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@{myobservation.myobservation1.date}"
+                        android:text="@{myobservation.date}"
                         android:textColor="@color/green"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -64,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@{myobservation.myobservation1.hour}"
+                        android:text="@{myobservation.hour}"
                         android:textColor="@color/dark_grey"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -80,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_below="@id/tv_date"
-                        android:text="@{myobservation.myobservation1.location}"
+                        android:text="@{myobservation.location}"
                         android:textColor="@color/dark_grey"
                         android:textSize="16sp" />
 
@@ -89,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:text="@{myobservation.myobservation1.species}"
+                        android:text="@{myobservation.species}"
                         android:textColor="@color/dark_grey"
                         android:textSize="16sp" />
                 </LinearLayout>

@@ -7,30 +7,30 @@
 
     <fragment
         android:id="@+id/myObservations"
-        android:name="com.example.monitoringapp.MyObservations"
+        android:name="com.example.monitoringapp.PersonalObservations"
         android:label="My observations"
         tools:layout="@layout/fragment_my_observations" >
         <action
-            android:id="@+id/action_myObservations_to_addObservation"
-            app:destination="@id/addObservation" />
+            android:id="@+id/action_myObservations_to_editObservation"
+            app:destination="@id/editObservation" />
     </fragment>
     <fragment
-        android:id="@+id/addObservation"
-        android:name="com.example.monitoringapp.AddObservation"
-        android:label="Add observation"
+        android:id="@+id/editObservation"
+        android:name="com.example.monitoringapp.EditObservation"
+        android:label="Edit observation"
         tools:layout="@layout/fragment_add_observation" >
         <action
-            android:id="@+id/action_addObservation_to_myObservations"
+            android:id="@+id/action_editObservation_to_myObservations"
             app:destination="@id/myObservations"
             app:popUpTo="@id/myObservations"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_addObservation_to_speciesList"
+            android:id="@+id/action_editObservation_to_speciesList"
             app:destination="@id/speciesList" />
     </fragment>
     <fragment
         android:id="@+id/allObservations"
-        android:name="com.example.monitoringapp.allObservations"
+        android:name="com.example.monitoringapp.AllObservations"
         android:label="fragment_all_observations"
         tools:layout="@layout/fragment_all_observations" />
     <fragment
@@ -44,9 +44,9 @@
         android:label="Add species to Observation"
         tools:layout="@layout/fragment_species_list" >
         <action
-            android:id="@+id/action_speciesList_to_addObservation"
-            app:destination="@id/addObservation"
-            app:popUpTo="@id/addObservation"
+            android:id="@+id/action_speciesList_to_editObservation"
+            app:destination="@id/editObservation"
+            app:popUpTo="@id/editObservation"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_speciesList_to_speciesDetails"

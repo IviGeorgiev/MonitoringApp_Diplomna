@@ -5,17 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_my_observations.*
+import com.example.monitoringapp.databinding.FragmentMyObservationsBinding
 
-class MyObservations : Fragment() {
-    private lateinit var adapter: RecyclerAdapter
+//layout = fragment_my_observations
+
+class PersonalObservations : Fragment() {
     private lateinit var recyclerView: RecyclerView
 
     private var idList = mutableListOf<String>()
@@ -24,8 +20,6 @@ class MyObservations : Fragment() {
     private var locationList = mutableListOf<String>()
     private var speciesList = mutableListOf<String>()
     //private var imagesList = mutableListOf<Int>()
-
-    private lateinit var fabButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,24 +31,30 @@ class MyObservations : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.fragment_my_observations, container, false)
+        //val view: View = inflater.inflate(R.layout.fragment_my_observations, container, false)
+        val binding = FragmentMyObservationsBinding.inflate(layoutInflater, container, false)
+        //fabButton = binding.fabButton
 
-        fabButton = view.findViewById(R.id.fab_button)
-        fabButton.setOnClickListener{
-            Navigation.findNavController(view).navigate(R.id.action_myObservations_to_addObservation)
+        val recyclerView: RecyclerView
+        recyclerView = binding.recyclerView
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = PersonalObservationsRecyclerAdapter(idList, dateList, hourList, locationList, speciesList)
+
+        binding.fabButton.setOnClickListener{
+            Navigation.findNavController(binding.root).navigate(R.id.action_myObservations_to_editObservation)
         }
 
-        return view
+        return binding.root
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val layoutManager = LinearLayoutManager(context)
+        /*val layoutManager = LinearLayoutManager(context)
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = RecyclerAdapter(idList, dateList, hourList, locationList, speciesList)
+        recyclerView.adapter = RecyclerAdapter(idList, dateList, hourList, locationList, speciesList)*/
 
         //rv_recyclerView.layoutManager = LinearLayoutManager(context)
         //rv_recyclerView.adapter = RecyclerAdapter(idList, dateList, hourList, locationList, speciesList)*/

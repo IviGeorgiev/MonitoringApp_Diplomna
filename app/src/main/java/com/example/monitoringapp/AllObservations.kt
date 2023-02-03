@@ -9,7 +9,7 @@ import android.view.ViewGroup
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class allObservations : Fragment() {
+class AllObservations : Fragment() {
 
     private var param1: String? = null
     private var param2: String? = null
@@ -32,7 +32,7 @@ class allObservations : Fragment() {
 
     companion object {
         fun newInstance(param1: String, param2: String) =
-            allObservations().apply {
+            AllObservations().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
