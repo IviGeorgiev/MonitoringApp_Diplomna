@@ -2,7 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -35,12 +36,9 @@ android {
         jvmTarget = '1.8'
     }
 
-    dataBinding {
-        enabled = true
-    }
-
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 
@@ -60,12 +58,11 @@ dependencies {
     implementation('androidx.navigation:navigation-ui-ktx:2.3.5')
     implementation('androidx.navigation:navigation-dynamic-features-fragment:2.3.5')
 
-    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-
-    implementation 'com.android.databinding:library:3.5.0-alpha06'
-    implementation 'androidx.databinding:databinding-compiler:3.6.2'
-
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
 
+    implementation platform('com.google.firebase:firebase-bom:31.2.1')
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }

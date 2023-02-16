@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="myobservation" type="com.example.monitoringapp.data.MyObservationData"/>
+        <variable name="personalObservation" type="com.example.monitoringapp.data.PersonalObservationData"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -26,10 +26,6 @@
                 android:id="@+id/tv_listid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:textColor="@color/dark_grey"
-                android:textSize="17sp"
-
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
@@ -53,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@{myobservation.date}"
+                        android:text="@{personalObservation.date}"
                         android:textColor="@color/green"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -63,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@{myobservation.hour}"
+                        android:text="@{personalObservation.hour}"
                         android:textColor="@color/dark_grey"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -79,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_below="@id/tv_date"
-                        android:text="@{myobservation.location}"
+                        android:text="@{personalObservation.location}"
                         android:textColor="@color/dark_grey"
                         android:textSize="16sp" />
 
@@ -88,9 +84,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:text="@{myobservation.species}"
+                        android:text='@{ " / " + personalObservation.species + " species" }'
                         android:textColor="@color/dark_grey"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="italic"/>
                 </LinearLayout>
 
             </LinearLayout>

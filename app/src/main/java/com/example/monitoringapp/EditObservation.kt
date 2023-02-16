@@ -10,9 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.monitoringapp.databinding.FragmentAddObservationBinding
-
-//layout = fragment_add_observation
+import com.example.monitoringapp.databinding.FragmentEditObservationBinding
 
 class EditObservation : Fragment() {
 
@@ -21,9 +19,9 @@ class EditObservation : Fragment() {
 
     private var speciesNamesList = mutableListOf<String>()
 
-    private lateinit var binding: FragmentAddObservationBinding
+    //private lateinit var binding: FragmentAddObservationBinding
     //private lateinit var observationViewModel: ObservationViewModel
-    val observationViewModel: ObservationViewModel by viewModels()
+    private val observationViewModel: ObservationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,16 +35,15 @@ class EditObservation : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //val viewModel: ObservationViewModel
-        val binding = FragmentAddObservationBinding.inflate(layoutInflater, container, false)
+        val binding = FragmentEditObservationBinding.inflate(layoutInflater, container, false)
         //binding  = DataBindingUtil.inflate(inflater,R.layout.fragment_add_observation, container, false)
 
         binding.observation = observationViewModel
 
         binding.lifecycleOwner = viewLifecycleOwner
+
         //val observationViewModel = ObservationViewModel()
         //binding.setVariable(FragmentAddObservationBinding.observation, observationViewModel)
-
-        // Inflate the layout for this fragment
         //val view = inflater.inflate(R.layout.fragment_add_observation, container, false)
 
         //val button = binding.root.findViewById<ImageButton>(R.id.choose_species_button)

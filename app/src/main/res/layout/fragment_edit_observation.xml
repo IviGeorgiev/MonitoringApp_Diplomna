@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
         <variable name="observation" type="com.example.monitoringapp.ObservationViewModel"/>
     </data>
@@ -51,7 +52,6 @@
                     android:maxLength="5"
                     android:inputType="number"
                     android:digits="0123456789:."
-
                     android:text="@{observation.observationView.hour}"/>
 
                 <EditText
@@ -103,7 +103,7 @@
 
                     android:clickable="true"
                     android:focusable="true"
-                    android:foreground="?selectableItemBackground"/>
+                    android:foreground="?selectableItemBackground" />
 
             </LinearLayout>
 
@@ -160,7 +160,7 @@
 
                         android:clickable="true"
                         android:focusable="true"
-                        android:foreground="?selectableItemBackground"/>
+                        android:foreground="?selectableItemBackground" />
                 </RelativeLayout>
 
                 <View
@@ -180,7 +180,7 @@
                 android:clipToPadding="false"
                 tools:itemCount="13"
                 android:layout_marginBottom="53dp"
-                tools:listitem="@layout/species_item_layout"/>
+                tools:listitem="@layout/species_item_layout" />
         </LinearLayout>
 
         <RelativeLayout
@@ -205,9 +205,10 @@
                     android:text="Submit"
                     android:textAllCaps="false"
                     android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </RelativeLayout>
+
     </FrameLayout>
 </layout>

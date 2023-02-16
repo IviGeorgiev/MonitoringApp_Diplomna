@@ -5,41 +5,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.example.monitoringapp.data.PersonalObservationData
+import com.example.monitoringapp.databinding.ItemLayoutBinding
 
-class PersonalObservationsRecyclerAdapter (private var list_ids: List<String>, private var dates: List<String>, private var hours: List<String>, private var locations: List<String>, private var species: List<String>) :
-    RecyclerView.Adapter<PersonalObservationsRecyclerAdapter.ViewHolder>(){
+class PersonalObservationsRecyclerAdapter (private val observationList: LiveData<List<PersonalObservationData>>) :
+    RecyclerView.Adapter<PersonalObservationsRecyclerAdapter.PersonalObservationViewHolder>(){
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val itemListId: TextView = itemView.findViewById(R.id.tv_listid)
-        val itemDate: TextView = itemView.findViewById(R.id.tv_date)
-        val itemHour: TextView = itemView.findViewById(R.id.tv_hour)
-        val itemLocation: TextView = itemView.findViewById(R.id.tv_location)
-        val itemSpecies: TextView = itemView.findViewById(R.id.tv_species)
+    class PersonalObservationViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
-        init{
-            itemView.setOnClickListener{v: View->
-                val position: Int = adapterPosition
-                Toast.makeText(itemView.context, "You clicked on # ${position+1}", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):PersonalObservationViewHolder {
+        //val v = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
         //return RecyclerView.ViewHolder(v)
-        return ViewHolder(v)
+
+        val v = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PersonalObservationViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemListId.text = list_ids[position]
-        holder.itemDate.text = dates[position]
-        holder.itemHour.text = hours[position]
-        holder.itemLocation.text = locations[position]
-        holder.itemSpecies.text = species[position]
+    override fun onBindViewHolder(holder: PersonalObservationViewHolder, position: Int) {
+        val personalObservation = observationList.value?.get(position)
+        holder.binding.personalObservation = personalObservation
+
     }
 
     override fun getItemCount(): Int {
-        return dates.size
+        return observationList.value?.size ?: 0
+        //return observationList.size
     }
 }

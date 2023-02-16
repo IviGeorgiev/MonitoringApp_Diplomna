@@ -1,10 +1,7 @@
 package com.example.monitoringapp.data
 
-import java.util.Date
-
-data class ObservationData(
+data class PersonalObservationData(
     val date: String,
     val hour: String,
-    val duration: String,
     val location: String,
-    val notes: String)
+    val species: String)

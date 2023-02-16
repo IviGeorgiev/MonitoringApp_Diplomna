@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/myObservations">
+    app:startDestination="@id/personalObservations">
 
     <fragment
-        android:id="@+id/myObservations"
+        android:id="@+id/personalObservations"
         android:name="com.example.monitoringapp.PersonalObservations"
         android:label="My observations"
-        tools:layout="@layout/fragment_my_observations" >
+        tools:layout="@layout/fragment_personal_observations" >
         <action
-            android:id="@+id/action_myObservations_to_editObservation"
+            android:id="@+id/action_personalObservations_to_editObservation"
             app:destination="@id/editObservation" />
     </fragment>
     <fragment
         android:id="@+id/editObservation"
         android:name="com.example.monitoringapp.EditObservation"
         android:label="Edit observation"
-        tools:layout="@layout/fragment_add_observation" >
+        tools:layout="@layout/fragment_edit_observation" >
         <action
-            android:id="@+id/action_editObservation_to_myObservations"
-            app:destination="@id/myObservations"
-            app:popUpTo="@id/myObservations"
+            android:id="@+id/action_editObservation_to_personalObservations"
+            app:destination="@id/personalObservations"
+            app:popUpTo="@id/personalObservations"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_editObservation_to_speciesList"

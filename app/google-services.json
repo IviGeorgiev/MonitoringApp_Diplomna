@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "772427917357",
+    "project_id": "monitoringapp-172c6",
+    "storage_bucket": "monitoringapp-172c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772427917357:android:ffff2613c739f38d6470a4",
+        "android_client_info": {
+          "package_name": "com.example.monitoringapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "772427917357-mbui04atk2a9elo9mu2noqvrciaoheck.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC9uTdOnzj9EhaUjX6JXhUrGTZvk22o84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "772427917357-mbui04atk2a9elo9mu2noqvrciaoheck.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
