@@ -8,16 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.monitoringapp.databinding.FragmentPersonalObservationsBinding
-import com.google.android.play.core.internal.al
 
 class PersonalObservations : Fragment() {
     private val viewModel: PersonalObservationsViewModel by viewModels()
 
     private lateinit var binding: FragmentPersonalObservationsBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

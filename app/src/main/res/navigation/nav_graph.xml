@@ -63,4 +63,14 @@
             app:popUpTo="@id/speciesList"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.monitoringapp.SignUpFragment"
+        android:label="Sign Up"
+        tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.monitoringapp.LogInFragment"
+        android:label="Log in"
+        tools:layout="@layout/fragment_log_in" />
 </navigation>
