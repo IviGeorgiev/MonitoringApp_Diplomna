@@ -19,8 +19,6 @@ class EditObservation : Fragment() {
 
     private var speciesNamesList = mutableListOf<String>()
 
-    //private lateinit var binding: FragmentAddObservationBinding
-    //private lateinit var observationViewModel: ObservationViewModel
     private val observationViewModel: ObservationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,30 +26,20 @@ class EditObservation : Fragment() {
         postToList()
     }
 
-    //eho
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //val viewModel: ObservationViewModel
         val binding = FragmentEditObservationBinding.inflate(layoutInflater, container, false)
-        //binding  = DataBindingUtil.inflate(inflater,R.layout.fragment_add_observation, container, false)
 
         binding.observation = observationViewModel
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        //val observationViewModel = ObservationViewModel()
-        //binding.setVariable(FragmentAddObservationBinding.observation, observationViewModel)
-        //val view = inflater.inflate(R.layout.fragment_add_observation, container, false)
-
-        //val button = binding.root.findViewById<ImageButton>(R.id.choose_species_button)
         binding.chooseSpeciesButton.setOnClickListener() {
             Navigation.findNavController(binding.root).navigate(R.id.action_editObservation_to_speciesList)
         }
 
-        //val binding = FragmentAddObservationBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -74,7 +62,4 @@ class EditObservation : Fragment() {
             addToList("Species name $i")
         }
     }
-    /*override fun onDestroyView() {
-        super.onDestroyView()
-    }*/
 }

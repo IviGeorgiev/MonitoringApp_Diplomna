@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/personalObservations"
         android:name="com.example.monitoringapp.PersonalObservations"
-        android:label="My observations"
+        android:label="Observations"
         tools:layout="@layout/fragment_personal_observations" >
         <action
             android:id="@+id/action_personalObservations_to_editObservation"
@@ -36,7 +36,7 @@
     <fragment
         android:id="@+id/userProfile"
         android:name="com.example.monitoringapp.UserProfile"
-        android:label="fragment_user_profile"
+        android:label="My Profile"
         tools:layout="@layout/fragment_user_profile" />
     <fragment
         android:id="@+id/speciesList"

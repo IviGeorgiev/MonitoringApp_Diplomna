@@ -31,6 +31,5 @@ class PersonalObservationsRecyclerAdapter (private val observationList: LiveData
 
     override fun getItemCount(): Int {
         return observationList.value?.size ?: 0
-        //return observationList.size
     }
 }

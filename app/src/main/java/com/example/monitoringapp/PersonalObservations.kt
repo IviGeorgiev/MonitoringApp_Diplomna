@@ -44,6 +44,10 @@ class PersonalObservations : Fragment() {
             //adapter.notifyItemRangeChanged()
             adapter.notifyDataSetChanged()
         }
+
+        binding.personalRecycler.setOnClickListener{
+            Navigation.findNavController(binding.root).navigate(R.id.action_personalObservations_to_editObservation)
+        }
     }
 
     override fun onDestroyView() {

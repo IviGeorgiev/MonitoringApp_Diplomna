@@ -4,11 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.monitoringapp.data.PersonalObservationData
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
 
 class PersonalObservationsViewModel: ViewModel() {
 
-    //val myObservations: LiveData<List<PersonalObservationData>> = liveData{emit(listOf(PersonalObservationData("18.01.2023","14:30","Sofia, City-Center", 10)))}
-    val myObservations: LiveData<List<PersonalObservationData>> = liveData{
+    private val db = FirebaseFirestore.getInstance()
+    private val observationsCollection = db.collection("observations")
+
+    val myObservations: LiveData<List<PersonalObservationData>> = liveData {
+        val snapshot = observationsCollection.get().await()
+        val observations = snapshot.documents.mapNotNull { document ->
+            document.toObject(PersonalObservationData::class.java)
+        }
+        emit(observations)
+    }
+    /*val myObservations: LiveData<List<PersonalObservationData>> = liveData{
         emit(
             listOf(
                 PersonalObservationData("18.01.2023","14:30","Sofia, City-Center", "10"),
@@ -22,6 +33,5 @@ class PersonalObservationsViewModel: ViewModel() {
                 PersonalObservationData("21.02.2023","12:30","Plovdiv, City-Center", "8")
             )
         )
-    }
-    //MyObservationData("18.01.2023","14:30","Sofia, City-Center", 10)
+    }*/
 }

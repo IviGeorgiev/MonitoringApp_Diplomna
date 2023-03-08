@@ -19,5 +19,10 @@
         android:id="@+id/signUpFragment"
         android:name="com.example.monitoringapp.SignUpFragment"
         android:label="Sign Up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_logInFragment"
+            app:destination="@id/logInFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

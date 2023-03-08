@@ -19,13 +19,10 @@ class MainActivity : AppCompatActivity() {
         if (authentication.currentUser == null) {
             startActivity(Intent(this@MainActivity, RegistrationActivity::class.java))
         }
-        startActivity(Intent(this@MainActivity, UserActivity::class.java))*/
-
+        startActivity(Intent(this@MainActivity, UserActivity::class.java))
+        }*/
 
         finish()
     }
 
 }
-    /*override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }*/

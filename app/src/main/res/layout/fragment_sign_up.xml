@@ -73,6 +73,7 @@
             android:gravity="center_horizontal"
             android:layout_margin="10dp"
             android:text="Already have an account? Log In"
+            android:textColor="@color/green"
             android:textSize="15sp" />
     </LinearLayout>
 </FrameLayout>
