@@ -6,7 +6,7 @@
     <data>
         <variable
             name="observation"
-            type="com.example.monitoringapp.data.PersonalObservationData" />
+            type="com.example.monitoringapp.data.ObservationData" />
     </data>
 
     <FrameLayout
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="Enter location..."
-                    android:maxLength="20"
+                    android:maxLength="23"
                     android:padding="7dp"
                     android:singleLine="true"
                     android:text="@{observation.location}"

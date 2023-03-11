@@ -1,6 +1,6 @@
 package com.example.monitoringapp.data
 
-data class PersonalObservationData(
+data class ObservationData(
     val id: String = "",
     val date: String = "",
     val hour: String = "",

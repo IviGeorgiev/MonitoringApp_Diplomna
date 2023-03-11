@@ -4,15 +4,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.monitoringapp.data.PersonalObservationData
+import com.example.monitoringapp.data.ObservationData
 import com.example.monitoringapp.databinding.ItemLayoutBinding
 
-class PersonalObservationsRecyclerAdapter (private var observations: List<PersonalObservationData> = emptyList()) :
-    RecyclerView.Adapter<PersonalObservationsRecyclerAdapter.PersonalObservationViewHolder>(){
+class ObservationsRecyclerAdapter (private var observations: List<ObservationData> = emptyList()) :
+    RecyclerView.Adapter<ObservationsRecyclerAdapter.PersonalObservationViewHolder>(){
 
-    private var onItemClickListener: ((PersonalObservationData) -> Unit)? = null
+    private var onItemClickListener: ((ObservationData) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (PersonalObservationData) -> Unit) {
+    fun setOnItemClickListener(listener: (ObservationData) -> Unit) {
         onItemClickListener = listener
     }
 
@@ -39,7 +39,7 @@ class PersonalObservationsRecyclerAdapter (private var observations: List<Person
         return observations.size
     }
 
-    fun updateObservations(newObservations: List<PersonalObservationData>) {
+    fun updateObservations(newObservations: List<ObservationData>) {
         observations = newObservations
         notifyDataSetChanged()
     }

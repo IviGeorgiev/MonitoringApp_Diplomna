@@ -21,7 +21,7 @@ class UserActivity : AppCompatActivity(){
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
 
-    private val drawerFragments = setOf(R.id.personalObservations, R.id.userProfile)
+    private val drawerFragments = setOf(R.id.observationsFragment, R.id.userProfile)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +76,7 @@ class UserActivity : AppCompatActivity(){
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             R.id.nav_observations -> {
-                navController.navigate(R.id.personalObservations)
+                navController.navigate(R.id.observationsFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             R.id.nav_addObservation -> {

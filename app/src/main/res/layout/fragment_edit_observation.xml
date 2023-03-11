@@ -4,7 +4,7 @@
     tools:ignore="HardcodedText">
 
     <data>
-        <variable name="observation" type="com.example.monitoringapp.data.PersonalObservationData" />
+        <variable name="observation" type="com.example.monitoringapp.data.ObservationData" />
     </data>
 
     <FrameLayout
@@ -83,7 +83,7 @@
                     android:layout_weight="1"
                     android:text="@{observation.location}"
                     android:singleLine="true"
-                    android:maxLength="20"
+                    android:maxLength="23"
                     android:textSize="16sp"
                     android:padding="7dp"
                     android:textColor="@color/dark_grey"

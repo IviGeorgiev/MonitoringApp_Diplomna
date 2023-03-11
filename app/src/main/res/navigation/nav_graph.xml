@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/personalObservations">
+    app:startDestination="@id/observationsFragment">
 
     <fragment
-        android:id="@+id/personalObservations"
-        android:name="com.example.monitoringapp.PersonalObservations"
+        android:id="@+id/observationsFragment"
+        android:name="com.example.monitoringapp.ObservationsFragment"
         android:label="Observations"
-        tools:layout="@layout/fragment_personal_observations" >
+        tools:layout="@layout/fragment_observations" >
         <action
-            android:id="@+id/action_personalObservations_to_editObservation"
+            android:id="@+id/action_observationsFragment_to_editObservation"
             app:destination="@id/editObservation"/>
         <action
-            android:id="@+id/action_personalObservations_to_addObservation"
+            android:id="@+id/action_observationsFragment_to_addObservation"
             app:destination="@id/addObservation" />
     </fragment>
     <fragment
@@ -23,32 +23,13 @@
         android:label="Edit observation"
         tools:layout="@layout/fragment_edit_observation" >
         <action
-            android:id="@+id/action_editObservation_to_personalObservations"
-            app:destination="@id/personalObservations"
-            app:popUpTo="@id/personalObservations"
+            android:id="@+id/action_editObservation_to_observationsFragment"
+            app:destination="@id/observationsFragment"
+            app:popUpTo="@id/observationsFragment"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_editObservation_to_speciesList"
-            app:destination="@id/speciesList" />
         <argument
             android:name="id"
             app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/userProfile"
-        android:name="com.example.monitoringapp.UserProfile"
-        android:label="My Profile"
-        tools:layout="@layout/fragment_user_profile" />
-    <fragment
-        android:id="@+id/speciesList"
-        android:name="com.example.monitoringapp.SpeciesList"
-        android:label="Add species to Observation"
-        tools:layout="@layout/fragment_species_list" >
-        <action
-            android:id="@+id/action_speciesList_to_editObservation"
-            app:destination="@id/editObservation"
-            app:popUpTo="@id/editObservation"
-            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addObservation"
@@ -56,9 +37,14 @@
         android:label="Add Observation"
         tools:layout="@layout/fragment_add_observation" >
         <action
-            android:id="@+id/action_addObservation_to_personalObservations"
-            app:destination="@id/personalObservations"
-            app:popUpTo="@id/personalObservations"
+            android:id="@+id/action_addObservation_to_observationsFragment"
+            app:destination="@id/observationsFragment"
+            app:popUpTo="@id/observationsFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/userProfile"
+        android:name="com.example.monitoringapp.UserProfile"
+        android:label="My Profile"
+        tools:layout="@layout/fragment_user_profile" />
 </navigation>

@@ -8,22 +8,22 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.example.monitoringapp.databinding.FragmentPersonalObservationsBinding
+import com.example.monitoringapp.databinding.FragmentObservationsBinding
 
-class PersonalObservations : Fragment() {
-    private val viewModel: PersonalObservationsViewModel by viewModels()
+class ObservationsFragment : Fragment() {
+    private val viewModel: ObservationsViewModel by viewModels()
 
-    private lateinit var binding: FragmentPersonalObservationsBinding
-    private lateinit var adapter: PersonalObservationsRecyclerAdapter
+    private lateinit var binding: FragmentObservationsBinding
+    private lateinit var adapter: ObservationsRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentPersonalObservationsBinding.inflate(layoutInflater, container, false)
+        binding = FragmentObservationsBinding.inflate(layoutInflater, container, false)
 
         binding.fabButton.setOnClickListener{
-            Navigation.findNavController(binding.root).navigate(R.id.action_personalObservations_to_addObservation)
+            Navigation.findNavController(binding.root).navigate(R.id.action_observationsFragment_to_addObservation)
         }
 
         return binding.root
@@ -37,14 +37,14 @@ class PersonalObservations : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val recyclerView = binding.personalRecycler
-        adapter = PersonalObservationsRecyclerAdapter(emptyList())
+        adapter = ObservationsRecyclerAdapter(emptyList())
 
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(false)
 
         adapter.setOnItemClickListener { observation ->
             val bundle = bundleOf("id" to observation.id)
-            Navigation.findNavController(binding.root).navigate(R.id.action_personalObservations_to_editObservation, bundle)
+            Navigation.findNavController(binding.root).navigate(R.id.action_observationsFragment_to_editObservation, bundle)
         }
 
         myObservations.observe(viewLifecycleOwner) { observations  ->
