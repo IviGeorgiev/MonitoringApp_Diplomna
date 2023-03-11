@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.monitoringapp.databinding.FragmentPersonalObservationsBinding
@@ -13,20 +14,20 @@ class PersonalObservations : Fragment() {
     private val viewModel: PersonalObservationsViewModel by viewModels()
 
     private lateinit var binding: FragmentPersonalObservationsBinding
+    private lateinit var adapter: PersonalObservationsRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPersonalObservationsBinding.inflate(layoutInflater, container, false)
-        //fabButton = binding.fabButton
 
         binding.fabButton.setOnClickListener{
-            Navigation.findNavController(binding.root).navigate(R.id.action_personalObservations_to_editObservation)
+            Navigation.findNavController(binding.root).navigate(R.id.action_personalObservations_to_addObservation)
         }
 
         return binding.root
-        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,21 +37,23 @@ class PersonalObservations : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val recyclerView = binding.personalRecycler
-        val adapter = PersonalObservationsRecyclerAdapter(myObservations)
+        adapter = PersonalObservationsRecyclerAdapter(emptyList())
+
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(false)
 
-        myObservations.observe(viewLifecycleOwner) {
-            //adapter.notifyItemRangeChanged()
-            adapter.notifyDataSetChanged()
+        adapter.setOnItemClickListener { observation ->
+            val bundle = bundleOf("id" to observation.id)
+            Navigation.findNavController(binding.root).navigate(R.id.action_personalObservations_to_editObservation, bundle)
         }
 
-        binding.personalRecycler.setOnClickListener{
-            Navigation.findNavController(binding.root).navigate(R.id.action_personalObservations_to_editObservation)
+        myObservations.observe(viewLifecycleOwner) { observations  ->
+            adapter.updateObservations(observations)
         }
+
     }
 
-    override fun onDestroyView() {
+    /*override fun onDestroyView() {
         super.onDestroyView()
-    }
+    }*/
 }

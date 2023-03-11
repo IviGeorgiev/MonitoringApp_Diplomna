@@ -10,7 +10,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".EditObservation"
+        tools:context=".AddObservation"
         android:background="@color/dirty_white">
 
         <LinearLayout
@@ -30,6 +30,7 @@
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:hint="Date"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/text_field_background"
                     android:padding="5dp"
@@ -44,6 +45,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:hint="Start time"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/text_field_background"
                     android:padding="5dp"
@@ -58,6 +60,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:hint="Minutes"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/text_field_background"
                     android:padding="5dp"
@@ -115,6 +118,7 @@
                     android:id="@+id/comment_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Notes..."
                     android:background="@drawable/text_field_background"
                     android:padding="8dp"
                     android:text="@{observation.notes}"/>
@@ -142,17 +146,9 @@
                         android:id="@+id/species_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{observation.species}"
+                        android:text="  X Species"
                         android:textStyle="bold"
                         android:textSize="18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="  species"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:layout_toEndOf="@+id/species_text"/>
 
                     <ImageButton
                         android:id="@+id/choose_species_button"
@@ -193,7 +189,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/save_button_layout"
+                android:id="@+id/submit_button_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -202,37 +198,15 @@
                 android:paddingEnd="16dp">
 
                 <Button
-                    android:id="@+id/save_button"
+                    android:id="@+id/submit_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="90dp"
                     android:minHeight="55dp"
-                    android:text="Save"
+                    android:text="Submit"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:gravity="left"
-                android:orientation="horizontal"
-                android:paddingLeft="16dp">
-
-                <ImageButton
-                    android:id="@+id/delete_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:src="@drawable/ic_baseline_delete_24"
-                    android:background="@null"
-
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?selectableItemBackground"/>
 
             </LinearLayout>
         </RelativeLayout>

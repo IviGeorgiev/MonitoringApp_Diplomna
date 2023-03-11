@@ -12,7 +12,10 @@
         tools:layout="@layout/fragment_personal_observations" >
         <action
             android:id="@+id/action_personalObservations_to_editObservation"
-            app:destination="@id/editObservation" />
+            app:destination="@id/editObservation"/>
+        <action
+            android:id="@+id/action_personalObservations_to_addObservation"
+            app:destination="@id/addObservation" />
     </fragment>
     <fragment
         android:id="@+id/editObservation"
@@ -27,12 +30,10 @@
         <action
             android:id="@+id/action_editObservation_to_speciesList"
             app:destination="@id/speciesList" />
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
-    <fragment
-        android:id="@+id/allObservations"
-        android:name="com.example.monitoringapp.AllObservations"
-        android:label="fragment_all_observations"
-        tools:layout="@layout/fragment_all_observations" />
     <fragment
         android:id="@+id/userProfile"
         android:name="com.example.monitoringapp.UserProfile"
@@ -48,19 +49,16 @@
             app:destination="@id/editObservation"
             app:popUpTo="@id/editObservation"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_speciesList_to_speciesDetails"
-            app:destination="@id/speciesDetails" />
     </fragment>
     <fragment
-        android:id="@+id/speciesDetails"
-        android:name="com.example.monitoringapp.SpeciesDetails"
-        android:label="fragment_species_details"
-        tools:layout="@layout/fragment_species_details" >
+        android:id="@+id/addObservation"
+        android:name="com.example.monitoringapp.AddObservation"
+        android:label="Add Observation"
+        tools:layout="@layout/fragment_add_observation" >
         <action
-            android:id="@+id/action_speciesDetails_to_speciesList"
-            app:destination="@id/speciesList"
-            app:popUpTo="@id/speciesList"
+            android:id="@+id/action_addObservation_to_personalObservations"
+            app:destination="@id/personalObservations"
+            app:popUpTo="@id/personalObservations"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

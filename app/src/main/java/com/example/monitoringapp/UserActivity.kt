@@ -80,7 +80,7 @@ class UserActivity : AppCompatActivity(){
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             R.id.nav_addObservation -> {
-                navController.navigate(R.id.editObservation)
+                navController.navigate(R.id.addObservation)
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             else -> {

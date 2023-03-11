@@ -1,37 +1,79 @@
 package com.example.monitoringapp
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import android.app.Application
+import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.*
 import com.example.monitoringapp.data.PersonalObservationData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
-class PersonalObservationsViewModel: ViewModel() {
+class PersonalObservationsViewModel(application: Application): AndroidViewModel(application) {
 
     private val db = FirebaseFirestore.getInstance()
     private val observationsCollection = db.collection("observations")
 
-    val myObservations: LiveData<List<PersonalObservationData>> = liveData {
-        val snapshot = observationsCollection.get().await()
-        val observations = snapshot.documents.mapNotNull { document ->
-            document.toObject(PersonalObservationData::class.java)
+    private val context = application.applicationContext
+
+    private val _myObservations = MutableLiveData<List<PersonalObservationData>>()
+    val myObservations: LiveData<List<PersonalObservationData>>
+        get() = _myObservations
+
+    init {
+        //Initial loading of data
+        observationsCollection.get().addOnSuccessListener { snapshot ->
+            val observations = snapshot.documents.mapNotNull { document ->
+                document.toObject(PersonalObservationData::class.java)?.copy(id = document.id)
+            }
+            _myObservations.value = observations
+        }.addOnFailureListener { e ->
+            Log.e("PersonalObservationsVM", "Error getting documents: ", e)
         }
-        emit(observations)
+
+        //Listen for changes
+        observationsCollection.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.e("PersonalObservationsVM", "Listen failed.", e)
+                return@addSnapshotListener
+            }
+            val observations = snapshot?.documents?.mapNotNull { document ->
+                document.toObject(PersonalObservationData::class.java)?.copy(id = document.id)
+            } ?: emptyList()
+            _myObservations.value = observations
+        }
     }
-    /*val myObservations: LiveData<List<PersonalObservationData>> = liveData{
-        emit(
-            listOf(
-                PersonalObservationData("18.01.2023","14:30","Sofia, City-Center", "10"),
-                PersonalObservationData("19.02.2023","13:20","Sliven, City-Center", "15"),
-                PersonalObservationData("20.02.2023","11:30","Burgas, City-Center", "18"),
-                PersonalObservationData("21.02.2023","12:30","Plovdiv, City-Center", "8"),
-                PersonalObservationData("22.02.2023","10:30","Sofia, City-Center", "9"),
-                PersonalObservationData("23.02.2023","17:30","Sofia, City-Center", "7"),
-                PersonalObservationData("24.02.2023","14:00","Varna, City-Center", "17"),
-                PersonalObservationData("20.02.2023","11:30","Burgas, City-Center", "18"),
-                PersonalObservationData("21.02.2023","12:30","Plovdiv, City-Center", "8")
-            )
-        )
-    }*/
+
+    fun getObservationById(id: String): LiveData<PersonalObservationData?> {
+        val observationDocRef = observationsCollection.document(id)
+
+        return liveData {
+            val snapshot = observationDocRef.get().await()
+            val observation = snapshot.toObject(PersonalObservationData::class.java)
+            emit(observation)
+        }
+    }
+
+    fun deleteObservation(observationId: String) {
+        observationsCollection.document(observationId).delete()
+            .addOnSuccessListener {
+                Toast.makeText(context, "Observation was deleted", Toast.LENGTH_SHORT).show()
+                Log.d("PersonalObservationsVM", "Observation deleted successfully")
+            }
+            .addOnFailureListener { e ->
+                Log.e("PersonalObservationsVM", "Error deleting observation", e)
+            }
+    }
+
+    fun changeObservation(observation: PersonalObservationData) {
+        observationsCollection.document(observation.id).set(observation)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Observation is saved", Toast.LENGTH_SHORT).show()
+                Log.d("PersonalObservationsVM", "Observation saved successfully")
+            }
+            .addOnFailureListener { e ->
+                Log.e("PersonalObservationsVM", "Error saving observation", e)
+            }
+    }
 }
