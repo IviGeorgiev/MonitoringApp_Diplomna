@@ -8,4 +8,5 @@ data class PersonalObservationData(
     //val photos: List<String> = emptyList(),
     val notes: String = "",
     val duration: String = "",
-    val species: String = "")
+    val species: String = "",
+    val speciesDetails: String = "")

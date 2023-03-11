@@ -68,22 +68,28 @@
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/choose_location_button"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:drawableRight="@drawable/ic_baseline_add_location"
-                android:paddingRight="20dp"
-                android:text="@{observation.location}"
-                android:textAllCaps="false"
-                android:textColor="@color/dark_grey"
-                android:textStyle="bold"
-                android:textSize="18sp"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:gravity="center_horizontal|center_vertical">
 
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?selectableItemBackground" />
+                <EditText
+                    android:id="@+id/location_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{observation.location}"
+                    android:singleLine="true"
+                    android:maxLength="20"
+                    android:textSize="16sp"
+                    android:padding="7dp"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -138,34 +144,35 @@
                     android:orientation="horizontal"
                     android:padding="10dp">
 
-                    <TextView
-                        android:id="@+id/species_text"
+                    <EditText
+                        android:id="@+id/species_field"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/text_field_background"
+                        android:padding="3dp"
+                        android:singleLine="true"
+                        android:maxLength="3"
+                        android:inputType="number"
                         android:text="@{observation.species}"
                         android:textStyle="bold"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="  species"
                         android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:layout_toEndOf="@+id/species_text"/>
+                        android:textSize="19sp"
+                        android:layout_toEndOf="@+id/species_field"/>
 
                     <ImageButton
                         android:id="@+id/choose_species_button"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:scaleType="fitCenter"
                         android:layout_alignParentEnd="true"
                         android:background="@color/white"
-                        android:src="@drawable/ic_baseline_add_species"
-
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?selectableItemBackground" />
+                        android:src="@drawable/ic_baseline_add_species"/>
                 </RelativeLayout>
 
                 <View
@@ -174,18 +181,20 @@
                     android:background="@color/green" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view2"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="4dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="4dp"
-                android:paddingBottom="4dp"
-                android:clipToPadding="false"
-                tools:itemCount="13"
-                android:layout_marginBottom="53dp"
-                tools:listitem="@layout/species_item_layout" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <EditText
+                    android:id="@+id/species_details_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_field_background"
+                    android:text="@{observation.speciesDetails}"
+                    android:padding="8dp" />
+            </LinearLayout>
         </LinearLayout>
 
         <RelativeLayout

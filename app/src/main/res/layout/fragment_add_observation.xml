@@ -4,14 +4,16 @@
     tools:ignore="HardcodedText">
 
     <data>
-        <variable name="observation" type="com.example.monitoringapp.data.PersonalObservationData" />
+        <variable
+            name="observation"
+            type="com.example.monitoringapp.data.PersonalObservationData" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AddObservation"
-        android:background="@color/dirty_white">
+        android:background="@color/dirty_white"
+        tools:context=".AddObservation">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,70 +31,85 @@
                     android:id="@+id/date_field"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Date"
                     android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:background="@drawable/text_field_background"
+                    android:digits="0123456789:."
+                    android:hint="Date"
+                    android:inputType="number"
+                    android:maxLength="10"
                     android:padding="5dp"
                     android:singleLine="true"
-                    android:maxLength="10"
-                    android:inputType="number"
-                    android:digits="0123456789:."
-                    android:text="@{observation.date}"/>
+                    android:text="@{observation.date}" />
 
                 <EditText
                     android:id="@+id/start_time_field"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Start time"
                     android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:background="@drawable/text_field_background"
+                    android:digits="0123456789:."
+                    android:hint="Start time"
+                    android:inputType="number"
+                    android:maxLength="5"
                     android:padding="5dp"
                     android:singleLine="true"
-                    android:maxLength="5"
-                    android:inputType="number"
-                    android:digits="0123456789:."
-                    android:text="@{observation.hour}"/>
+                    android:text="@{observation.hour}" />
 
                 <EditText
                     android:id="@+id/minutes_field"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Minutes"
                     android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:background="@drawable/text_field_background"
+                    android:hint="Minutes"
+                    android:inputType="number"
+                    android:maxLength="4"
                     android:padding="5dp"
                     android:singleLine="true"
-                    android:maxLength="4"
-                    android:inputType="number"
-                    android:text="@{observation.duration}"/>
+                    android:text="@{observation.duration}" />
 
             </LinearLayout>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/choose_location_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:drawableRight="@drawable/ic_baseline_add_location"
-                android:paddingRight="20dp"
-                android:text="@{observation.location}"
-                android:textAllCaps="false"
-                android:textColor="@color/dark_grey"
-                android:textStyle="bold"
-                android:textSize="18sp"
-
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?selectableItemBackground" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_horizontal|center_vertical"
                 android:orientation="horizontal"
+                android:padding="10dp">
+
+                <EditText
+                    android:id="@+id/location_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Enter location..."
+                    android:maxLength="20"
+                    android:padding="7dp"
+                    android:singleLine="true"
+                    android:text="@{observation.location}"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/choose_location_button"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?selectableItemBackground"
+                    android:gravity="right"
+                    android:src="@drawable/ic_baseline_add_location" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/pale_grey"
+                android:orientation="horizontal"
                 android:padding="8dp">
 
                 <ImageButton
@@ -100,11 +117,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/pale_grey"
-                    android:src="@drawable/ic_baseline_add_a_photo_24"
-
                     android:clickable="true"
+
                     android:focusable="true"
-                    android:foreground="?selectableItemBackground" />
+                    android:foreground="?selectableItemBackground"
+                    android:src="@drawable/ic_baseline_add_a_photo_24" />
 
             </LinearLayout>
 
@@ -118,17 +135,17 @@
                     android:id="@+id/comment_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Notes..."
                     android:background="@drawable/text_field_background"
+                    android:hint="Notes..."
                     android:padding="8dp"
-                    android:text="@{observation.notes}"/>
+                    android:text="@{observation.notes}" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="@color/white"
+                android:orientation="vertical"
                 android:paddingTop="10dp">
 
                 <View
@@ -142,26 +159,36 @@
                     android:orientation="horizontal"
                     android:padding="10dp">
 
-                    <TextView
-                        android:id="@+id/species_text"
+                    <EditText
+                        android:id="@+id/species_field"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="  X Species"
-                        android:textStyle="bold"
-                        android:textSize="18sp" />
+                        android:background="@drawable/text_field_background"
+                        android:hint="..."
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:padding="3dp"
+                        android:singleLine="true"
+                        android:text="@{observation.species}"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/species_field"
+                        android:text="  species"
+                        android:textSize="19sp"
+                        android:textStyle="bold" />
 
                     <ImageButton
                         android:id="@+id/choose_species_button"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:scaleType="fitCenter"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_alignParentEnd="true"
                         android:background="@color/white"
-                        android:src="@drawable/ic_baseline_add_species"
-
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?selectableItemBackground" />
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_baseline_add_species" />
                 </RelativeLayout>
 
                 <View
@@ -170,18 +197,21 @@
                     android:background="@color/green" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view2"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="4dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="4dp"
-                android:paddingBottom="4dp"
-                android:clipToPadding="false"
-                tools:itemCount="13"
-                android:layout_marginBottom="53dp"
-                tools:listitem="@layout/species_item_layout" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <EditText
+                    android:id="@+id/species_details_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_field_background"
+                    android:hint="Write down the species you've obsevred..."
+                    android:padding="8dp" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <RelativeLayout
@@ -205,8 +235,8 @@
                     android:minHeight="55dp"
                     android:text="Submit"
                     android:textAllCaps="false"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </RelativeLayout>

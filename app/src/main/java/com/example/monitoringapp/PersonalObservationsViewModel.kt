@@ -76,4 +76,15 @@ class PersonalObservationsViewModel(application: Application): AndroidViewModel(
                 Log.e("PersonalObservationsVM", "Error saving observation", e)
             }
     }
+
+    fun addObservation(observation: PersonalObservationData) {
+        observationsCollection.add(observation)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Submitted", Toast.LENGTH_SHORT).show()
+                Log.d("PersonalObservationsVM", "Observation added successfully")
+            }
+            .addOnFailureListener { e ->
+                Log.e("PersonalObservationsVM", "Error adding observation", e)
+            }
+    }
 }
