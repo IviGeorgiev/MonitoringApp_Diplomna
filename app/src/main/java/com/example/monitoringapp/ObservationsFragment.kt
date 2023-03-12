@@ -1,6 +1,7 @@
 package com.example.monitoringapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,10 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import com.example.monitoringapp.data.ObservationData
 import com.example.monitoringapp.databinding.FragmentObservationsBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class ObservationsFragment : Fragment() {
     private val viewModel: ObservationsViewModel by viewModels()
@@ -22,7 +26,11 @@ class ObservationsFragment : Fragment() {
     ): View? {
         binding = FragmentObservationsBinding.inflate(layoutInflater, container, false)
 
-        binding.fabButton.setOnClickListener{
+        binding.filterFabButton.setOnClickListener{
+            //-
+        }
+
+        binding.addFabButton.setOnClickListener{
             Navigation.findNavController(binding.root).navigate(R.id.action_observationsFragment_to_addObservation)
         }
 
@@ -36,7 +44,7 @@ class ObservationsFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val recyclerView = binding.personalRecycler
+        val recyclerView = binding.observationRecycler
         adapter = ObservationsRecyclerAdapter(emptyList())
 
         recyclerView.adapter = adapter
@@ -53,7 +61,4 @@ class ObservationsFragment : Fragment() {
 
     }
 
-    /*override fun onDestroyView() {
-        super.onDestroyView()
-    }*/
 }

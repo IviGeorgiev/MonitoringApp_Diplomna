@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="personalObservation" type="com.example.monitoringapp.data.ObservationData"/>
+        <variable name="individualObservation" type="com.example.monitoringapp.data.ObservationData"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -23,7 +23,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_listid"
+                android:id="@+id/tv_listId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -34,8 +34,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignTop="@id/tv_listid"
-                android:layout_toEndOf="@id/tv_listid"
+                android:layout_alignTop="@id/tv_listId"
+                android:layout_toEndOf="@id/tv_listId"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical">
 
@@ -49,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@{personalObservation.date}"
+                        android:text="@{individualObservation.date}"
                         android:textColor="@color/green"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="@{personalObservation.hour}"
+                        android:text="@{individualObservation.hour}"
                         android:textColor="@color/dark_grey"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -74,8 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_below="@id/tv_date"
-                        android:text="@{personalObservation.location}"
+                        android:text="@{individualObservation.location}"
                         android:textColor="@color/dark_grey"
                         android:textSize="16sp" />
 
@@ -84,7 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
-                        android:text='@{ "/ " + personalObservation.species + " species" }'
+                        android:text='@{ "/ " + individualObservation.species + " species" }'
                         android:textColor="@color/dark_grey"
                         android:textSize="16sp"
                         android:textStyle="italic"/>

@@ -1,23 +1,29 @@
 package com.example.monitoringapp
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.example.monitoringapp.data.ObservationData
 import com.example.monitoringapp.databinding.FragmentAddObservationBinding
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.google.firebase.ktx.Firebase
+import java.util.*
+import com.google.firebase.storage.ktx.storage
 
 class AddObservation : Fragment() {
+
     private val viewModel: ObservationsViewModel by viewModels()
     private lateinit var binding: FragmentAddObservationBinding
 
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }*/
+    private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +33,10 @@ class AddObservation : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
+        binding.uploadImagesButton.setOnClickListener{
+            getContent.launch("image/*")
+        }
+
         binding.submitButton.setOnClickListener {
             addObservation()
         }
@@ -34,9 +44,35 @@ class AddObservation : Fragment() {
         return binding.root
     }
 
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }*/
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            selectedImageUri = it
+            uploadImage(selectedImageUri!!)
+        }
+    }
+
+    private fun uploadImage(imageUri: Uri) {
+        val imageName = UUID.randomUUID().toString()
+        val storageRef = Firebase.storage.reference.child("photos/$imageName")
+
+        val uploadTask = storageRef.putFile(imageUri)
+        uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let { throw it }
+            }
+            storageRef.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUri = task.result
+                Glide.with(requireContext())
+                    .load(downloadUri.toString())
+                    .into(binding.imageView)
+            } else {
+                Log.e("UPLOAD", "Failed to upload image: ${task.exception}")
+                Toast.makeText(requireContext(), "Failed to upload image", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     private fun addObservation(){
         val observation = ObservationData(
@@ -44,6 +80,7 @@ class AddObservation : Fragment() {
             hour = binding.startTimeField.text.toString(),
             location = binding.locationField.text.toString(),
             notes = binding.commentField.text.toString(),
+            photo = selectedImageUri?.toString() ?: "",
             duration = binding.minutesField.text.toString(),
             species = binding.speciesField.text.toString(),
             speciesDetails = binding.speciesDetailsField.text.toString()

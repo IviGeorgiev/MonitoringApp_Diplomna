@@ -6,7 +6,6 @@
     tools:ignore="HardcodedText"
     tools:context=".UserProfile">
 
-    <!-- Top green rectangle with image -->
     <RelativeLayout
         android:id="@+id/rectangle"
         android:layout_width="match_parent"
@@ -21,7 +20,6 @@
 
     </RelativeLayout>
 
-    <!-- Email and Change Password boxes -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

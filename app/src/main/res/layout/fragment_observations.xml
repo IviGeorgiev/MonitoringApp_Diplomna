@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ObservationsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/personalRecycler"
+            android:id="@+id/observationRecycler"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -17,23 +17,35 @@
             android:paddingTop="4dp"
             android:paddingEnd="4dp"
             android:paddingBottom="4dp"
-            android:clipToPadding="false"
-            tools:itemCount="17"
-            tools:listitem="@layout/item_layout" />
+            tools:listitem="@layout/item_layout"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_button"
+            android:id="@+id/add_fab_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
             android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/ic_baseline_add_24"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true" />
+            app:layout_anchor="@id/observationRecycler"
+            app:layout_anchorGravity="bottom|end" />
 
-    </FrameLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/filter_fab_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/add_fab_button"
+            android:layout_alignBottom="@id/add_fab_button"
+            android:layout_marginBottom="80dp"
+            android:layout_marginEnd="19dp"
+            android:src="@drawable/ic_baseline_filter_list_24"
+            app:fabSize="mini"
+            app:borderWidth="0dp"
+            app:layout_anchor="@id/add_fab_button"
+            app:layout_anchorGravity="top|end" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

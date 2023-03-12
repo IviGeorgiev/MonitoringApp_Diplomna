@@ -99,7 +99,7 @@
                 android:padding="8dp">
 
                 <ImageButton
-                    android:id="@+id/upload_images_button"
+                    android:id="@+id/update_images_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/pale_grey"
@@ -108,6 +108,13 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?selectableItemBackground" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"/>
 
             </LinearLayout>
 
@@ -166,7 +173,6 @@
                         android:layout_toEndOf="@+id/species_field"/>
 
                     <ImageButton
-                        android:id="@+id/choose_species_button"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:scaleType="fitCenter"
@@ -229,7 +235,7 @@
                 android:layout_alignParentBottom="true"
                 android:gravity="left"
                 android:orientation="horizontal"
-                android:paddingLeft="16dp">
+                android:paddingLeft="8dp">
 
                 <ImageButton
                     android:id="@+id/delete_button"

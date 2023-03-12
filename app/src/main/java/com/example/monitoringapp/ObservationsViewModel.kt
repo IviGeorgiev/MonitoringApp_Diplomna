@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.monitoringapp.data.ObservationData
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
 
 class ObservationsViewModel(application: Application): AndroidViewModel(application) {
@@ -27,13 +29,13 @@ class ObservationsViewModel(application: Application): AndroidViewModel(applicat
             }
             _myObservations.value = observations
         }.addOnFailureListener { e ->
-            Log.e("PersonalObservationsVM", "Error getting documents: ", e)
+            Log.e("ObservationsVM", "Error getting documents: ", e)
         }
 
         //Listen for changes
         observationsCollection.addSnapshotListener { snapshot, e ->
             if (e != null) {
-                Log.e("PersonalObservationsVM", "Listen failed.", e)
+                Log.e("ObservationsVM", "Listen failed.", e)
                 return@addSnapshotListener
             }
             val observations = snapshot?.documents?.mapNotNull { document ->
@@ -54,24 +56,44 @@ class ObservationsViewModel(application: Application): AndroidViewModel(applicat
     }
 
     fun deleteObservation(observationId: String) {
-        observationsCollection.document(observationId).delete()
-            .addOnSuccessListener {
-                Toast.makeText(context, "Observation was deleted", Toast.LENGTH_SHORT).show()
-                Log.d("PersonalObservationsVM", "Observation deleted successfully")
+        val observationRef = db.collection("observations").document(observationId)
+
+        observationRef.get().addOnSuccessListener { documentSnapshot ->
+            val observation = documentSnapshot.toObject(ObservationData::class.java)
+            val photoUrl = observation?.photo
+
+            if (!photoUrl.isNullOrEmpty()) {
+                try {
+                    val photoRef = Firebase.storage.getReferenceFromUrl(photoUrl)
+                    photoRef.delete().addOnSuccessListener {
+                        Log.d("ObservationsVM", "Observation photo deleted successfully")
+                    }.addOnFailureListener { e ->
+                        Log.e("ObservationsVM", "Failed to delete observation photo", e)
+                    }
+                } catch (e: IllegalArgumentException) {
+                    Log.e("ObservationsVM", "Invalid observation photo URL: $photoUrl")
+                }
             }
-            .addOnFailureListener { e ->
-                Log.e("PersonalObservationsVM", "Error deleting observation", e)
+
+            // Delete the observation
+            observationRef.delete().addOnSuccessListener {
+                Log.d("ObservationsVM", "Observation deleted successfully")
+            }.addOnFailureListener { e ->
+                Log.e("ObservationsVM", "Failed to delete observation", e)
             }
+        }.addOnFailureListener { e ->
+            Log.e("ObservationsVM", "Failed to get observation", e)
+        }
     }
 
     fun changeObservation(observation: ObservationData) {
         observationsCollection.document(observation.id).set(observation)
             .addOnSuccessListener {
-                Toast.makeText(context, "Observation is saved", Toast.LENGTH_SHORT).show()
-                Log.d("PersonalObservationsVM", "Observation saved successfully")
+                Toast.makeText(context, "Observation is updated", Toast.LENGTH_SHORT).show()
+                Log.d("ObservationsVM", "Observation updated successfully")
             }
             .addOnFailureListener { e ->
-                Log.e("PersonalObservationsVM", "Error saving observation", e)
+                Log.e("ObservationsVM", "Error updating observation", e)
             }
     }
 
@@ -79,10 +101,10 @@ class ObservationsViewModel(application: Application): AndroidViewModel(applicat
         observationsCollection.add(observation)
             .addOnSuccessListener {
                 Toast.makeText(context, "Submitted", Toast.LENGTH_SHORT).show()
-                Log.d("PersonalObservationsVM", "Observation added successfully")
+                Log.d("ObservationsVM", "Observation added successfully")
             }
             .addOnFailureListener { e ->
-                Log.e("PersonalObservationsVM", "Error adding observation", e)
+                Log.e("ObservationsVM", "Error adding observation", e)
             }
     }
 }

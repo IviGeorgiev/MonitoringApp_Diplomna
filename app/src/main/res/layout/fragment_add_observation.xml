@@ -123,6 +123,13 @@
                     android:foreground="?selectableItemBackground"
                     android:src="@drawable/ic_baseline_add_a_photo_24" />
 
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -182,7 +189,6 @@
                         android:textStyle="bold" />
 
                     <ImageButton
-                        android:id="@+id/choose_species_button"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_alignParentEnd="true"
@@ -208,7 +214,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_field_background"
-                    android:hint="Write down the species you've obsevred..."
+                    android:hint="Write down the observed species..."
                     android:padding="8dp" />
             </LinearLayout>
 

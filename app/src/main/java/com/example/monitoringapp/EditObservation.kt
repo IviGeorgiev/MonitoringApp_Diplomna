@@ -1,24 +1,29 @@
 package com.example.monitoringapp
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
 import com.example.monitoringapp.data.ObservationData
 import com.example.monitoringapp.databinding.FragmentEditObservationBinding
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import java.io.File
+import java.util.*
 
 class EditObservation : Fragment() {
     private val viewModel: ObservationsViewModel by viewModels()
     private lateinit var binding: FragmentEditObservationBinding
 
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //postToList()
-    }*/
+    private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +32,10 @@ class EditObservation : Fragment() {
         binding = FragmentEditObservationBinding.inflate(layoutInflater, container, false)
 
         binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.updateImagesButton.setOnClickListener{
+            getContent.launch("image/*")
+        }
 
         binding.deleteButton.setOnLongClickListener {
             val observationId = arguments?.getString("id")
@@ -53,8 +62,82 @@ class EditObservation : Fragment() {
             viewModel.getObservationById(observationId).observe(viewLifecycleOwner) { observation ->
                 if (observation != null) {
                     binding.observation = observation
+
+                    Glide.with(requireContext())
+                        .load(observation.photo)
+                        .into(binding.imageView)
                 }
             }
+        }
+    }
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            selectedImageUri = it
+            if (selectedImageUri != null) {
+                updateImage(selectedImageUri!!)
+            }
+        }
+    }
+
+    private fun updateImage(imageUri: Uri) {
+        val imageName = UUID.randomUUID().toString()
+        val storageRef = Firebase.storage.reference.child("photos/$imageName")
+
+        val uploadTask = storageRef.putFile(imageUri)
+        uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let { throw it }
+            }
+            storageRef.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUri = task.result
+
+                val oldImageUrl = binding.observation?.photo
+
+                val updatedObservation = binding.observation?.copy(photo = downloadUri.toString())
+                binding.observation = updatedObservation
+
+                Glide.with(requireContext())
+                    .load(downloadUri)
+                    .into(binding.imageView)
+
+                // Delete the old image
+                if (!oldImageUrl.isNullOrEmpty()) {
+                    try {
+                        Log.d("UPDATE", "Old image URL: $oldImageUrl")
+                        if (oldImageUrl.startsWith("content://")) {
+                            val oldImageUri = Uri.parse(oldImageUrl)
+                            val oldImagePath = oldImageUri.path
+                            if (oldImagePath != null) {
+                                val file = File(oldImagePath)
+                                if (file.exists()) {
+                                    file.delete()
+                                    Log.d("UPDATE", "Old image deleted successfully")
+                                }
+                            }
+                        } else {
+                            val oldImageRef = Firebase.storage.getReferenceFromUrl(oldImageUrl)
+                            oldImageRef.delete().addOnSuccessListener {
+                                Log.d("UPDATE", "Old image deleted successfully")
+                            }.addOnFailureListener { e ->
+                                Log.e("UPDATE", "Failed to delete old image", e)
+                                Toast.makeText(requireContext(), "Failed to delete old image", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } catch (e: IllegalArgumentException) {
+                        Log.e("UPDATE", "Invalid old image URL: $oldImageUrl")
+                    }
+                }
+                //-
+            } else {
+                Log.e("UPDATE", "Failed to update image: ${task.exception}")
+                Toast.makeText(requireContext(), "Failed to update image", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener {
+            Log.e("UPDATE", "Failed to upload image", it)
+            Toast.makeText(requireContext(), "Failed to upload image", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -67,6 +150,7 @@ class EditObservation : Fragment() {
             duration = binding.minutesField.text.toString(),
             hour = binding.startTimeField.text.toString(),
             location = binding.locationField.text.toString(),
+            photo = binding.observation?.photo ?: "",
             notes = binding.commentField.text.toString(),
             species = binding.speciesField.text.toString(),
             speciesDetails = binding.speciesDetailsField.text.toString()

@@ -8,7 +8,7 @@ import com.example.monitoringapp.data.ObservationData
 import com.example.monitoringapp.databinding.ItemLayoutBinding
 
 class ObservationsRecyclerAdapter (private var observations: List<ObservationData> = emptyList()) :
-    RecyclerView.Adapter<ObservationsRecyclerAdapter.PersonalObservationViewHolder>(){
+    RecyclerView.Adapter<ObservationsRecyclerAdapter.ObservationViewHolder>(){
 
     private var onItemClickListener: ((ObservationData) -> Unit)? = null
 
@@ -16,22 +16,22 @@ class ObservationsRecyclerAdapter (private var observations: List<ObservationDat
         onItemClickListener = listener
     }
 
-    class PersonalObservationViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    class ObservationViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):PersonalObservationViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ObservationViewHolder {
         val v = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PersonalObservationViewHolder(v)
+        return ObservationViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: PersonalObservationViewHolder, position: Int) {
-        val personalObservation = observations[position]
-        holder.binding.personalObservation = personalObservation
+    override fun onBindViewHolder(holder: ObservationViewHolder, position: Int) {
+        val individualObservation = observations[position]
+        holder.binding.individualObservation = individualObservation
 
         holder.itemView.setOnClickListener {
-            onItemClickListener?.invoke(personalObservation)
+            onItemClickListener?.invoke(individualObservation)
         }
 
-        Log.d("PersonalAdapter", "Observations: $observations")
+        Log.d("ObservationAdapter", "Observations: $observations")
 
     }
 
