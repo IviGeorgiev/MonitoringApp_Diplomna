@@ -19,8 +19,8 @@ class ObservationsRecyclerAdapter (private var observations: List<ObservationDat
     class ObservationViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ObservationViewHolder {
-        val v = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ObservationViewHolder(v)
+        val view = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ObservationViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ObservationViewHolder, position: Int) {

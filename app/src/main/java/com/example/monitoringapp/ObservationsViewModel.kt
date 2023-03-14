@@ -99,7 +99,10 @@ class ObservationsViewModel(application: Application): AndroidViewModel(applicat
 
     fun addObservation(observation: ObservationData) {
         observationsCollection.add(observation)
-            .addOnSuccessListener {
+            .addOnSuccessListener { documentReference ->
+                val observationWithId = observation.copy(id = documentReference.id)
+                observationsCollection.document(documentReference.id).set(observationWithId)
+
                 Toast.makeText(context, "Submitted", Toast.LENGTH_SHORT).show()
                 Log.d("ObservationsVM", "Observation added successfully")
             }

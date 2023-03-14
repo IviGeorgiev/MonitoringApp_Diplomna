@@ -2,6 +2,7 @@ package com.example.monitoringapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
@@ -51,8 +52,8 @@ class LogInFragment : Fragment() {
                     startActivity(Intent(requireActivity(), UserActivity::class.java))
                     requireActivity().finish()
                 } else {
-                    //Log.e("SIGN_UP", "Failed to sign up", it.exception)
-                    Toast.makeText(context, "Log In Failed!", Toast.LENGTH_SHORT).show()
+                    Log.e("SIGN_UP", "Failed to sign up", it.exception)
+                    Toast.makeText(context, "Wrong email or password!", Toast.LENGTH_SHORT).show()
                 }
             }
         }

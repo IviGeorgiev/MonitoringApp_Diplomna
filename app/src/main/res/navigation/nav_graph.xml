@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/editObservation"
         android:name="com.example.monitoringapp.EditObservation"
-        android:label="Edit observation"
+        android:label="Edit Observation"
         tools:layout="@layout/fragment_edit_observation" >
         <action
             android:id="@+id/action_editObservation_to_observationsFragment"
@@ -41,10 +41,22 @@
             app:destination="@id/observationsFragment"
             app:popUpTo="@id/observationsFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addObservation_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/userProfile"
         android:name="com.example.monitoringapp.UserProfile"
         android:label="My Profile"
         tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.monitoringapp.MapFragment"
+        android:label="Near me"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_addObservation"
+            app:destination="@id/addObservation"/>
+    </fragment>
 </navigation>

@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import com.example.monitoringapp.data.ObservationData
 import com.example.monitoringapp.databinding.FragmentAddObservationBinding
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.util.*
 import com.google.firebase.storage.ktx.storage
@@ -23,6 +25,7 @@ class AddObservation : Fragment() {
     private val viewModel: ObservationsViewModel by viewModels()
     private lateinit var binding: FragmentAddObservationBinding
 
+    private val user = Firebase.auth.currentUser
     private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
@@ -37,8 +40,12 @@ class AddObservation : Fragment() {
             getContent.launch("image/*")
         }
 
+        binding.seeLocationButton.setOnClickListener{
+            Navigation.findNavController(binding.root).navigate(R.id.action_addObservation_to_mapFragment)
+        }
+
         binding.submitButton.setOnClickListener {
-            addObservation()
+            addFragObservation()
         }
 
         return binding.root
@@ -74,8 +81,11 @@ class AddObservation : Fragment() {
         }
     }
 
-    private fun addObservation(){
+    private fun addFragObservation(){
+        val email = user?.email
         val observation = ObservationData(
+            id = "",
+            creator = email ?: "",
             date = binding.dateField.text.toString(),
             hour = binding.startTimeField.text.toString(),
             location = binding.locationField.text.toString(),

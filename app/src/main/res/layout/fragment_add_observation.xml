@@ -3,12 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="HardcodedText">
 
-    <data>
-        <variable
-            name="observation"
-            type="com.example.monitoringapp.data.ObservationData" />
-    </data>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,8 +33,7 @@
                     android:inputType="number"
                     android:maxLength="10"
                     android:padding="5dp"
-                    android:singleLine="true"
-                    android:text="@{observation.date}" />
+                    android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/start_time_field"
@@ -54,8 +47,7 @@
                     android:inputType="number"
                     android:maxLength="5"
                     android:padding="5dp"
-                    android:singleLine="true"
-                    android:text="@{observation.hour}" />
+                    android:singleLine="true"/>
 
                 <EditText
                     android:id="@+id/minutes_field"
@@ -68,8 +60,7 @@
                     android:inputType="number"
                     android:maxLength="4"
                     android:padding="5dp"
-                    android:singleLine="true"
-                    android:text="@{observation.duration}" />
+                    android:singleLine="true"/>
 
             </LinearLayout>
 
@@ -90,13 +81,12 @@
                     android:maxLength="23"
                     android:padding="7dp"
                     android:singleLine="true"
-                    android:text="@{observation.location}"
                     android:textColor="@color/dark_grey"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <ImageButton
-                    android:id="@+id/choose_location_button"
+                    android:id="@+id/see_location_button"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="?selectableItemBackground"
@@ -144,8 +134,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_field_background"
                     android:hint="Notes..."
-                    android:padding="8dp"
-                    android:text="@{observation.notes}" />
+                    android:padding="8dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -176,7 +165,6 @@
                         android:maxLength="3"
                         android:padding="3dp"
                         android:singleLine="true"
-                        android:text="@{observation.species}"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 

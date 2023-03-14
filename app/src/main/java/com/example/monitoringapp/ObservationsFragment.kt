@@ -27,7 +27,17 @@ class ObservationsFragment : Fragment() {
         binding = FragmentObservationsBinding.inflate(layoutInflater, container, false)
 
         binding.filterFabButton.setOnClickListener{
-            //-
+            val query = FirebaseFirestore.getInstance().collection("observations")
+                .orderBy("species", Query.Direction.DESCENDING)
+            query.get().addOnSuccessListener { querySnapshot ->
+                val sortedObservations = querySnapshot.toObjects(ObservationData::class.java)
+                    .sortedByDescending { it.species.toIntOrNull() }
+                Log.d("ObservationsFragment", "Filtered observations: $sortedObservations")
+                adapter.updateObservations(sortedObservations)
+                adapter.notifyDataSetChanged()
+            }.addOnFailureListener { exception ->
+                Log.e("ObservationsFragment", "Error getting observations", exception)
+            }
         }
 
         binding.addFabButton.setOnClickListener{
@@ -46,7 +56,6 @@ class ObservationsFragment : Fragment() {
 
         val recyclerView = binding.observationRecycler
         adapter = ObservationsRecyclerAdapter(emptyList())
-
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(false)
 

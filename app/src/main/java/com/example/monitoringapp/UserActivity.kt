@@ -1,9 +1,7 @@
 package com.example.monitoringapp
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -81,6 +79,10 @@ class UserActivity : AppCompatActivity(){
             }
             R.id.nav_addObservation -> {
                 navController.navigate(R.id.addObservation)
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            R.id.nav_map -> {
+                navController.navigate(R.id.mapFragment)
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             else -> {

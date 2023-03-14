@@ -63,7 +63,7 @@ class SignUpFragment : Fragment() {
                     Toast.makeText(context, "Successfully Signed Up", Toast.LENGTH_SHORT).show()
                     Navigation.findNavController(binding.root).navigate(R.id.action_signUpFragment_to_logInFragment)
                 } else {
-                    //Log.e("SIGN_UP", "Failed to sign up", it.exception)
+                    Log.e("SIGN_UP", "Failed to sign up", it.exception)
                     Toast.makeText(context, "Sign Up Failed!", Toast.LENGTH_SHORT).show()
                 }
             }

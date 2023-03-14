@@ -20,6 +20,12 @@
                 android:icon="@drawable/ic_baseline_add_species"
                 android:title="Add Observation"
                 android:checkable="true" />
+
+            <item
+                android:id="@+id/nav_map"
+                android:icon="@drawable/ic_baseline_map_24"
+                android:title="Map"
+                android:checkable="true" />
         </menu>
     </item>
 

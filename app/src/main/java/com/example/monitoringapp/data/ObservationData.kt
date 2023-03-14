@@ -2,6 +2,7 @@ package com.example.monitoringapp.data
 
 data class ObservationData(
     val id: String = "",
+    val creator: String = "",
     val date: String = "",
     val hour: String = "",
     val location: String = "",

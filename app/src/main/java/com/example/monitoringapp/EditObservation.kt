@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.monitoringapp.data.ObservationData
 import com.example.monitoringapp.databinding.FragmentEditObservationBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.File
@@ -24,6 +25,7 @@ class EditObservation : Fragment() {
     private lateinit var binding: FragmentEditObservationBinding
 
     private var selectedImageUri: Uri? = null
+    private val user = Firebase.auth.currentUser
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,20 +36,33 @@ class EditObservation : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.updateImagesButton.setOnClickListener{
-            getContent.launch("image/*")
+            if (binding.observation?.creator == user?.email) {
+                getContent.launch("image/*")
+            } else {
+                Toast.makeText(requireContext(), "You can only update images for your own observations", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.deleteButton.setOnLongClickListener {
-            val observationId = arguments?.getString("id")
-            if (observationId != null) {
-                viewModel.deleteObservation(observationId)
+            if (binding.observation?.creator == user?.email) {
+                val observationId = arguments?.getString("id")
+                if (observationId != null) {
+                    viewModel.deleteObservation(observationId)
+                }
+                Navigation.findNavController(binding.root).navigate(R.id.action_editObservation_to_observationsFragment)
+                true
+            } else {
+                Toast.makeText(requireContext(), "You can delete only your observations", Toast.LENGTH_SHORT).show()
+                false
             }
-            Navigation.findNavController(binding.root).navigate(R.id.action_editObservation_to_observationsFragment)
-            true
         }
 
         binding.saveButton.setOnClickListener {
-            changeObservation()
+            if (binding.observation?.creator == user?.email) {
+                changeFragObservation()
+            } else {
+                Toast.makeText(requireContext(), "You can't change this observation", Toast.LENGTH_SHORT).show()
+            }
         }
 
         return binding.root
@@ -123,14 +138,28 @@ class EditObservation : Fragment() {
                                 Log.d("UPDATE", "Old image deleted successfully")
                             }.addOnFailureListener { e ->
                                 Log.e("UPDATE", "Failed to delete old image", e)
-                                Toast.makeText(requireContext(), "Failed to delete old image", Toast.LENGTH_SHORT).show()
                             }
                         }
                     } catch (e: IllegalArgumentException) {
                         Log.e("UPDATE", "Invalid old image URL: $oldImageUrl")
                     }
                 }
-                //-
+
+                val observationId = arguments?.getString("id") ?: return@addOnCompleteListener
+                val email = user?.email
+                val changeObservation = ObservationData(
+                    id = observationId,
+                    creator = email ?: "",
+                    date = binding.dateField.text.toString(),
+                    duration = binding.minutesField.text.toString(),
+                    hour = binding.startTimeField.text.toString(),
+                    location = binding.locationField.text.toString(),
+                    photo = downloadUri.toString(),
+                    notes = binding.commentField.text.toString(),
+                    species = binding.speciesField.text.toString(),
+                    speciesDetails = binding.speciesDetailsField.text.toString()
+                )
+                viewModel.changeObservation(changeObservation)
             } else {
                 Log.e("UPDATE", "Failed to update image: ${task.exception}")
                 Toast.makeText(requireContext(), "Failed to update image", Toast.LENGTH_SHORT).show()
@@ -141,11 +170,13 @@ class EditObservation : Fragment() {
         }
     }
 
-    private fun changeObservation() {
+    private fun changeFragObservation() {
         val observationId = arguments?.getString("id") ?: return
+        val email = user?.email
 
         val changeObservation = ObservationData(
             id = observationId,
+            creator = email ?: "",
             date = binding.dateField.text.toString(),
             duration = binding.minutesField.text.toString(),
             hour = binding.startTimeField.text.toString(),
