@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/observationsFragment"
-        android:name="com.example.monitoringapp.ObservationsFragment"
+        android:name="com.example.monitoringapp.views.ObservationsFragment"
         android:label="Observations"
         tools:layout="@layout/fragment_observations" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/editObservation"
-        android:name="com.example.monitoringapp.EditObservation"
+        android:name="com.example.monitoringapp.views.EditObservation"
         android:label="Edit Observation"
         tools:layout="@layout/fragment_edit_observation" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/addObservation"
-        android:name="com.example.monitoringapp.AddObservation"
+        android:name="com.example.monitoringapp.views.AddObservation"
         android:label="Add Observation"
         tools:layout="@layout/fragment_add_observation" >
         <action
@@ -47,12 +47,12 @@
     </fragment>
     <fragment
         android:id="@+id/userProfile"
-        android:name="com.example.monitoringapp.UserProfile"
+        android:name="com.example.monitoringapp.views.UserProfile"
         android:label="My Profile"
         tools:layout="@layout/fragment_user_profile" />
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.monitoringapp.MapFragment"
+        android:name="com.example.monitoringapp.views.MapFragment"
         android:label="Near me"
         tools:layout="@layout/fragment_map" >
         <action

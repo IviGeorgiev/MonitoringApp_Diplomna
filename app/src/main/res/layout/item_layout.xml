@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="individualObservation" type="com.example.monitoringapp.data.ObservationData"/>
+        <variable name="individualObservation" type="com.example.monitoringapp.model.ObservationData"/>
     </data>
 
     <androidx.cardview.widget.CardView

@@ -1,4 +1,4 @@
-package com.example.monitoringapp
+package com.example.monitoringapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 
         FirebaseAuth.getInstance().signOut()
 
-        startActivity(Intent(this@MainActivity, RegistrationActivity::class.java))
+        startActivity(Intent(this, RegistrationActivity::class.java))
 
         finish()
     }

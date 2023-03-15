@@ -23,7 +23,7 @@
             android:value="AIzaSyAQsgMRDFmjJuJiVGdz4xOzujCfWjiE0u0" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,8 +35,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".UserActivity" />
+        <activity android:name=".activities.RegistrationActivity" />
+        <activity android:name=".activities.UserActivity" />
     </application>
 
 </manifest>

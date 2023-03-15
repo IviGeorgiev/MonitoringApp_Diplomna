@@ -1,10 +1,10 @@
-package com.example.monitoringapp
+package com.example.monitoringapp.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.monitoringapp.data.ObservationData
+import com.example.monitoringapp.model.ObservationData
 import com.example.monitoringapp.databinding.ItemLayoutBinding
 
 class ObservationsRecyclerAdapter (private var observations: List<ObservationData> = emptyList()) :
@@ -18,7 +18,7 @@ class ObservationsRecyclerAdapter (private var observations: List<ObservationDat
 
     class ObservationViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ObservationViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObservationViewHolder {
         val view = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ObservationViewHolder(view)
     }

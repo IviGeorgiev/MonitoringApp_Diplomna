@@ -1,4 +1,4 @@
-package com.example.monitoringapp
+package com.example.monitoringapp.views
 
 import android.net.Uri
 import android.os.Bundle
@@ -12,8 +12,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
-import com.example.monitoringapp.data.ObservationData
+import com.example.monitoringapp.R
+import com.example.monitoringapp.model.ObservationData
 import com.example.monitoringapp.databinding.FragmentEditObservationBinding
+import com.example.monitoringapp.viewmodel.ObservationsViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage

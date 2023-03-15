@@ -1,4 +1,4 @@
-package com.example.monitoringapp
+package com.example.monitoringapp.views
 
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.example.monitoringapp.data.ObservationData
+import com.example.monitoringapp.R
+import com.example.monitoringapp.adapter.ObservationsRecyclerAdapter
+import com.example.monitoringapp.model.ObservationData
 import com.example.monitoringapp.databinding.FragmentObservationsBinding
+import com.example.monitoringapp.viewmodel.ObservationsViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 

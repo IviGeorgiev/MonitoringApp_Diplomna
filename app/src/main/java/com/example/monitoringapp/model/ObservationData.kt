@@ -1,4 +1,4 @@
-package com.example.monitoringapp.data
+package com.example.monitoringapp.model
 
 data class ObservationData(
     val id: String = "",

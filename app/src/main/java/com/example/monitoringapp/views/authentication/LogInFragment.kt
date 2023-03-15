@@ -1,4 +1,4 @@
-package com.example.monitoringapp
+package com.example.monitoringapp.views.authentication
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.navigation.Navigation
+import com.example.monitoringapp.R
+import com.example.monitoringapp.activities.UserActivity
 import com.example.monitoringapp.databinding.FragmentLogInBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

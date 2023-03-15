@@ -1,10 +1,11 @@
-package com.example.monitoringapp
+package com.example.monitoringapp.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.monitoringapp.R
 import com.example.monitoringapp.databinding.ActivityRegistrationBinding
 
 class RegistrationActivity : AppCompatActivity() {
@@ -14,7 +15,6 @@ class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityRegistrationBinding.inflate(layoutInflater)
-        //setContentView(R.layout.activity_main)
         setContentView(binding.root)
 
         val navHostFragment = supportFragmentManager

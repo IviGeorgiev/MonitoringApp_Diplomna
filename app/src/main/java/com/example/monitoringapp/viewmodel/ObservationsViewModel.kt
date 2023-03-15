@@ -1,10 +1,10 @@
-package com.example.monitoringapp
+package com.example.monitoringapp.viewmodel
 
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
-import com.example.monitoringapp.data.ObservationData
+import com.example.monitoringapp.model.ObservationData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage

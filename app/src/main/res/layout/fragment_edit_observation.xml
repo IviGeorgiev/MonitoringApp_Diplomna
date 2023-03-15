@@ -4,13 +4,13 @@
     tools:ignore="HardcodedText">
 
     <data>
-        <variable name="observation" type="com.example.monitoringapp.data.ObservationData" />
+        <variable name="observation" type="com.example.monitoringapp.model.ObservationData" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".EditObservation"
+        tools:context=".views.EditObservation"
         android:background="@color/dirty_white">
 
         <LinearLayout

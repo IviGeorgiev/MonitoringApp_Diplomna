@@ -1,4 +1,4 @@
-package com.example.monitoringapp
+package com.example.monitoringapp.activities
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.monitoringapp.R
 import com.example.monitoringapp.databinding.ActivityUserBinding
 
 class UserActivity : AppCompatActivity(){
@@ -31,7 +32,10 @@ class UserActivity : AppCompatActivity(){
 
         navController = navHostFragment.navController
         drawerLayout = binding.drawerLayout
-        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout,
+            R.string.nav_open,
+            R.string.nav_close
+        )
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
