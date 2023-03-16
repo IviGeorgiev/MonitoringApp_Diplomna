@@ -18,8 +18,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
 class ObservationsFragment : Fragment() {
-    private val viewModel: ObservationsViewModel by viewModels()
 
+    private val viewModel: ObservationsViewModel by viewModels()
     private lateinit var binding: FragmentObservationsBinding
     private lateinit var adapter: ObservationsRecyclerAdapter
 

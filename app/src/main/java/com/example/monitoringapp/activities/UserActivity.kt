@@ -16,7 +16,6 @@ import com.example.monitoringapp.databinding.ActivityUserBinding
 class UserActivity : AppCompatActivity(){
 
     private lateinit var navController: NavController
-
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
 

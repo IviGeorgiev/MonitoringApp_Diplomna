@@ -28,7 +28,6 @@ class AddObservation : Fragment() {
     private lateinit var binding: FragmentAddObservationBinding
 
     private val user = Firebase.auth.currentUser
-    private var selectedImageUri: Uri? = null
     private var downloadUri: Uri? = null
 
     override fun onCreateView(
@@ -56,8 +55,8 @@ class AddObservation : Fragment() {
 
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
-            selectedImageUri = it
-            uploadImage(selectedImageUri!!)
+            val selectedImageUri = it
+            uploadImage(selectedImageUri)
         }
     }
 

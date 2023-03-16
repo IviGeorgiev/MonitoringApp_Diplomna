@@ -14,13 +14,12 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.ktx.auth
 
 class SignUpFragment : Fragment() {
-    private lateinit var binding: FragmentSignUpBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
+        val binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
 
         val authentication = Firebase.auth
 

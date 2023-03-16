@@ -14,13 +14,12 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.ktx.auth
 
 class UserProfile : Fragment() {
-    private lateinit var binding: FragmentUserProfileBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentUserProfileBinding.inflate(layoutInflater, container, false)
+        val binding = FragmentUserProfileBinding.inflate(layoutInflater, container, false)
 
         val currentUser = FirebaseAuth.getInstance().currentUser
 

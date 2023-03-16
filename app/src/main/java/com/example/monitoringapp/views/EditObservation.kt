@@ -22,10 +22,9 @@ import com.google.firebase.storage.ktx.storage
 import java.util.*
 
 class EditObservation : Fragment() {
+
     private val viewModel: ObservationsViewModel by viewModels()
     private lateinit var binding: FragmentEditObservationBinding
-
-    private var selectedImageUri: Uri? = null
     private val user = Firebase.auth.currentUser
 
     override fun onCreateView(
@@ -90,10 +89,8 @@ class EditObservation : Fragment() {
 
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
-            selectedImageUri = it
-            if (selectedImageUri != null) {
-                updateImage(selectedImageUri!!)
-            }
+            val selectedImageUri = it
+            updateImage(selectedImageUri)
         }
     }
 
