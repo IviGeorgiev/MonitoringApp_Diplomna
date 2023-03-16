@@ -19,7 +19,7 @@ class LogInFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLogInBinding.inflate(layoutInflater, container, false)
 
         val authentication = Firebase.auth
@@ -34,28 +34,28 @@ class LogInFragment : Fragment() {
             val emailPattern = android.util.Patterns.EMAIL_ADDRESS
 
             if (email.isBlank()) {
-                Toast.makeText(context, "You must enter email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "You must enter email", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (!emailPattern.matcher(email).matches()) {
-                Toast.makeText(context, "Invalid email format", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Invalid email format", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (password.isBlank()) {
-                Toast.makeText(context, "You must enter password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "You must enter password", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             authentication.signInWithEmailAndPassword(email, password).addOnCompleteListener{
                 if (it.isSuccessful) {
-                    Toast.makeText(context, "Successfully Logged in", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Successfully Logged in", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(requireActivity(), UserActivity::class.java))
                     requireActivity().finish()
                 } else {
                     Log.e("SIGN_UP", "Failed to sign up", it.exception)
-                    Toast.makeText(context, "Wrong email or password!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Wrong email or password!", Toast.LENGTH_SHORT).show()
                 }
             }
         }

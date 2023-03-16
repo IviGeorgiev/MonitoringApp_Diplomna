@@ -2,7 +2,6 @@ package com.example.monitoringapp.viewmodel
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.monitoringapp.model.ObservationData
 import com.google.firebase.firestore.FirebaseFirestore
@@ -14,8 +13,6 @@ class ObservationsViewModel(application: Application): AndroidViewModel(applicat
 
     private val db = FirebaseFirestore.getInstance()
     private val observationsCollection = db.collection("observations")
-
-    private val context = application.applicationContext
 
     private val _myObservations = MutableLiveData<List<ObservationData>>()
     val myObservations: LiveData<List<ObservationData>>
@@ -62,6 +59,7 @@ class ObservationsViewModel(application: Application): AndroidViewModel(applicat
             val observation = documentSnapshot.toObject(ObservationData::class.java)
             val photoUrl = observation?.photo
 
+            //Delete the photo if there is one
             if (!photoUrl.isNullOrEmpty()) {
                 try {
                     val photoRef = Firebase.storage.getReferenceFromUrl(photoUrl)
@@ -89,7 +87,6 @@ class ObservationsViewModel(application: Application): AndroidViewModel(applicat
     fun changeObservation(observation: ObservationData) {
         observationsCollection.document(observation.id).set(observation)
             .addOnSuccessListener {
-                Toast.makeText(context, "Observation is updated", Toast.LENGTH_SHORT).show()
                 Log.d("ObservationsVM", "Observation updated successfully")
             }
             .addOnFailureListener { e ->
@@ -102,8 +99,6 @@ class ObservationsViewModel(application: Application): AndroidViewModel(applicat
             .addOnSuccessListener { documentReference ->
                 val observationWithId = observation.copy(id = documentReference.id)
                 observationsCollection.document(documentReference.id).set(observationWithId)
-
-                Toast.makeText(context, "Submitted", Toast.LENGTH_SHORT).show()
                 Log.d("ObservationsVM", "Observation added successfully")
             }
             .addOnFailureListener { e ->

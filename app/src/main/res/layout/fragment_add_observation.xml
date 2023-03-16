@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="HardcodedText">
+    tools:ignore="HardcodedText,ContentDescription,Autofill,LabelFor">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                     android:background="@drawable/text_field_background"
                     android:digits="0123456789:."
                     android:hint="Date"
-                    android:inputType="number"
+                    android:inputType="date"
                     android:maxLength="10"
                     android:padding="5dp"
                     android:singleLine="true" />
@@ -81,6 +81,7 @@
                     android:maxLength="23"
                     android:padding="7dp"
                     android:singleLine="true"
+                    android:inputType="text"
                     android:textColor="@color/dark_grey"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -90,7 +91,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="?selectableItemBackground"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:src="@drawable/ic_baseline_add_location" />
 
             </LinearLayout>
@@ -133,6 +134,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_field_background"
+                    android:inputType="textMultiLine"
                     android:hint="Notes..."
                     android:padding="8dp"/>
             </LinearLayout>
@@ -202,6 +204,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/text_field_background"
+                    android:inputType="textMultiLine"
                     android:hint="Write down the observed species..."
                     android:padding="8dp" />
             </LinearLayout>
@@ -217,8 +220,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:gravity="right"
+                android:gravity="end"
                 android:orientation="horizontal"
+                android:paddingStart="16dp"
                 android:paddingEnd="16dp">
 
                 <Button

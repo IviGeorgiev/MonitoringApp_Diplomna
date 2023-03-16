@@ -78,6 +78,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    //Adding markers for display purposes
     private fun addMarkers() {
         val locations = listOf(
             LatLng(42.664123, 23.369225),

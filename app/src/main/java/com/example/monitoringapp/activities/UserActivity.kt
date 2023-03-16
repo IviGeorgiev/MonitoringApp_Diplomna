@@ -71,6 +71,7 @@ class UserActivity : AppCompatActivity(){
         } else super.onOptionsItemSelected(item)
     }
 
+    //Logic for the dropdown menu
     private fun onNavigationItemSelected(menuItem: MenuItem) {
         when (menuItem.itemId) {
             R.id.nav_profile -> {

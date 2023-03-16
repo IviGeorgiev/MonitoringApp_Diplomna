@@ -29,11 +29,12 @@ class AddObservation : Fragment() {
 
     private val user = Firebase.auth.currentUser
     private var selectedImageUri: Uri? = null
+    private var downloadUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAddObservationBinding.inflate(layoutInflater, container, false)
 
         binding.lifecycleOwner = viewLifecycleOwner
@@ -72,7 +73,7 @@ class AddObservation : Fragment() {
             storageRef.downloadUrl
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val downloadUri = task.result
+                downloadUri = task.result
                 Glide.with(requireContext())
                     .load(downloadUri.toString())
                     .into(binding.imageView)
@@ -92,7 +93,7 @@ class AddObservation : Fragment() {
             hour = binding.startTimeField.text.toString(),
             location = binding.locationField.text.toString(),
             notes = binding.commentField.text.toString(),
-            photo = selectedImageUri?.toString() ?: "",
+            photo = downloadUri.toString(),
             duration = binding.minutesField.text.toString(),
             species = binding.speciesField.text.toString(),
             speciesDetails = binding.speciesDetailsField.text.toString()
@@ -108,6 +109,7 @@ class AddObservation : Fragment() {
             return
         }else{
             viewModel.addObservation(observation)
+            Toast.makeText(context, "Submitted", Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()
         }
     }

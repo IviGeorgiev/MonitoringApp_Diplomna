@@ -19,7 +19,7 @@ class SignUpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
 
         val authentication = Firebase.auth
@@ -35,37 +35,37 @@ class SignUpFragment : Fragment() {
             val emailPattern = android.util.Patterns.EMAIL_ADDRESS
 
             if (email.isBlank()) {
-                Toast.makeText(context, "You must enter email", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "You must enter email", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (!emailPattern.matcher(email).matches()) {
-                Toast.makeText(context, "Invalid email format", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Invalid email format", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (password.isBlank() || confirmPassword.isBlank()) {
-                Toast.makeText(context, "You must enter password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "You must enter password", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (password.length < 8){
-                Toast.makeText(context, "Password must be at least 8 characters long", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Password must be at least 8 characters long", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (password != confirmPassword) {
-                Toast.makeText(context, "Passwords don't match", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Passwords don't match", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             authentication.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
                 if (it.isSuccessful) {
-                    Toast.makeText(context, "Successfully Signed Up", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Successfully Signed Up", Toast.LENGTH_SHORT).show()
                     Navigation.findNavController(binding.root).navigate(R.id.action_signUpFragment_to_logInFragment)
                 } else {
                     Log.e("SIGN_UP", "Failed to sign up", it.exception)
-                    Toast.makeText(context, "Sign Up Failed!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Sign Up Failed!", Toast.LENGTH_SHORT).show()
                 }
             }
         }

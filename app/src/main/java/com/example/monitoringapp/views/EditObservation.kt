@@ -19,7 +19,6 @@ import com.example.monitoringapp.viewmodel.ObservationsViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import java.io.File
 import java.util.*
 
 class EditObservation : Fragment() {
@@ -32,7 +31,7 @@ class EditObservation : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEditObservationBinding.inflate(layoutInflater, container, false)
 
         binding.lifecycleOwner = viewLifecycleOwner
@@ -50,6 +49,7 @@ class EditObservation : Fragment() {
                 val observationId = arguments?.getString("id")
                 if (observationId != null) {
                     viewModel.deleteObservation(observationId)
+                    Toast.makeText(requireContext(), "Observation was deleted", Toast.LENGTH_SHORT).show()
                 }
                 Navigation.findNavController(binding.root).navigate(R.id.action_editObservation_to_observationsFragment)
                 true
@@ -120,27 +120,15 @@ class EditObservation : Fragment() {
                     .load(downloadUri)
                     .into(binding.imageView)
 
-                // Delete the old image
+                // Delete the old photo
                 if (!oldImageUrl.isNullOrEmpty()) {
                     try {
                         Log.d("UPDATE", "Old image URL: $oldImageUrl")
-                        if (oldImageUrl.startsWith("content://")) {
-                            val oldImageUri = Uri.parse(oldImageUrl)
-                            val oldImagePath = oldImageUri.path
-                            if (oldImagePath != null) {
-                                val file = File(oldImagePath)
-                                if (file.exists()) {
-                                    file.delete()
-                                    Log.d("UPDATE", "Old image deleted successfully")
-                                }
-                            }
-                        } else {
-                            val oldImageRef = Firebase.storage.getReferenceFromUrl(oldImageUrl)
-                            oldImageRef.delete().addOnSuccessListener {
-                                Log.d("UPDATE", "Old image deleted successfully")
-                            }.addOnFailureListener { e ->
-                                Log.e("UPDATE", "Failed to delete old image", e)
-                            }
+                        val oldImageRef = Firebase.storage.getReferenceFromUrl(oldImageUrl)
+                        oldImageRef.delete().addOnSuccessListener {
+                            Log.d("UPDATE", "Old image deleted successfully")
+                        }.addOnFailureListener { e ->
+                            Log.e("UPDATE", "Failed to delete old image", e)
                         }
                     } catch (e: IllegalArgumentException) {
                         Log.e("UPDATE", "Invalid old image URL: $oldImageUrl")
@@ -195,10 +183,11 @@ class EditObservation : Fragment() {
             changeObservation.duration.isEmpty() ||
             changeObservation.species.isEmpty() ||
             changeObservation.speciesDetails.isEmpty()) {
-            Toast.makeText(context, "You can't have empty fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "You can't have empty fields", Toast.LENGTH_SHORT).show()
             return
         }else{
             viewModel.changeObservation(changeObservation)
+            Toast.makeText(requireContext(), "Observation is updated", Toast.LENGTH_SHORT).show()
         }
     }
 }
