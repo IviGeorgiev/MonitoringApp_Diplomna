@@ -38,14 +38,24 @@
             android:id="@+id/filter_fab_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/add_fab_button"
-            android:layout_alignBottom="@id/add_fab_button"
             android:layout_marginBottom="80dp"
             android:layout_marginEnd="19dp"
             android:src="@drawable/ic_baseline_filter_list_24"
             app:fabSize="mini"
             app:borderWidth="0dp"
             app:layout_anchor="@id/add_fab_button"
+            app:layout_anchorGravity="top|end" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/my_filter_fab_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="130dp"
+            android:layout_marginEnd="19dp"
+            android:src="@drawable/ic_baseline_person_24"
+            app:fabSize="mini"
+            app:borderWidth="0dp"
+            app:layout_anchor="@id/filter_fab_button"
             app:layout_anchorGravity="top|end" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
